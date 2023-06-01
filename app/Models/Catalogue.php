@@ -21,7 +21,7 @@ class Catalogue extends Model
     ];
     public $timestamps = false;
 
-    public function cover(): Attribute
+    public function img(): Attribute
     {
         return Attribute::make(
             get: fn ($img) => config('catalogue.img_dir') . '/' . $img
