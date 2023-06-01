@@ -16,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [AppController::class, 'home'])->name('app.home');
+
 Route::get('/catalogue', [CatalogueController::class, 'index'])->name('catalogue.index');
+
+Route::fallback(function () {
+    return redirect()->route('app.home');
+});
 
 // Route::get('/', function () {
 //     return view('welcome');
