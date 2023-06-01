@@ -10,4 +10,8 @@ class AppController extends Controller
     {
         return view('pages.home');
     }
+    public function about()
+    {
+        return view('pages.about');
+    }
 }
