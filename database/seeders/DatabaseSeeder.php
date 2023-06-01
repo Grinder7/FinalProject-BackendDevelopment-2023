@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
 
         Catalogue::create([
             'name' => 'Indomie Goreng',
+            'stock' => 10,
             'price' => 2500,
             'img' => '0lxKQl2mvqEh70XLvgIA.png',
         ]);

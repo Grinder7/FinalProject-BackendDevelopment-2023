@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('catalogues', function (Blueprint $table) {
             $table->ulid()->unique();
             $table->string('name');
+            $table->integer('stock')->default(0);
             $table->integer('price');
             $table->string('img');
         });
