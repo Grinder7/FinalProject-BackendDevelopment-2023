@@ -20,7 +20,7 @@
     @yield('styles')
 </head>
 
-<body>
+<body class="bg-body-tertiary">
 
     @include('partials.app-navbar')
 

@@ -14,8 +14,9 @@
             <li><a href="{{ route('catalogue.index') }}" class="nav-link px-2  "
                     style="{{ request()->is('catalogue*') ? 'text-decoration:underline' : '' }}">Catalogue</a>
             </li>
-            <li><a href="#" class="nav-link px-2"
-                    style="{{ request()->is('about*') ? 'text-decoration:underline' : '' }}">About</a></li>
+            {{-- TEMPORARY --}}
+            <li><a href="{{ route('app.checkout') }}" class="nav-link px-2"
+                    style="{{ request()->is('checkout*') ? 'text-decoration:underline' : '' }}">About</a></li>
         </ul>
 
         <div class="col-md-3 text-end">
