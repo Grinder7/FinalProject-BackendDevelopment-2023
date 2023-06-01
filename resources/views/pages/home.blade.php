@@ -1,104 +1,93 @@
-@extends('layout.app')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('title', 'Home')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+    <title>IndoJuni</title>
 
-@section('styles')
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/app/xyXVxK19116nI6TPT5KF.png') }}" />
+    {{-- Bootstrap --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    {{-- Font Awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        .b-example-divider {
-            width: 100%;
-            height: 3rem;
-            background-color: rgba(0, 0, 0, .1);
-            border: solid rgba(0, 0, 0, .15);
-            border-width: 1px 0;
-            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-        }
-
-        .b-example-vr {
-            flex-shrink: 0;
-            width: 1.5rem;
-            height: 100vh;
-        }
-
-        .bi {
-            vertical-align: -.125em;
-            fill: currentColor;
-        }
-
-        .nav-scroller {
-            position: relative;
-            z-index: 2;
-            height: 2.75rem;
-            overflow-y: hidden;
-        }
-
-        .nav-scroller .nav {
-            display: flex;
-            flex-wrap: nowrap;
-            padding-bottom: 1rem;
-            margin-top: -1px;
-            overflow-x: auto;
-            text-align: center;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .btn-bd-primary {
-            --bd-violet-bg: #712cf9;
-            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-            --bs-btn-font-weight: 600;
-            --bs-btn-color: var(--bs-white);
-            --bs-btn-bg: var(--bd-violet-bg);
-            --bs-btn-border-color: var(--bd-violet-bg);
-            --bs-btn-hover-color: var(--bs-white);
-            --bs-btn-hover-bg: #6528e0;
-            --bs-btn-hover-border-color: #6528e0;
-            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-            --bs-btn-active-color: var(--bs-btn-hover-color);
-            --bs-btn-active-bg: #5a23c8;
-            --bs-btn-active-border-color: #5a23c8;
-        }
-
-        .bd-mode-toggle {
-            z-index: 1500;
+        .nav-link {
+            color: white;
         }
     </style>
-@endsection
+</head>
 
-@section('content')
-    <div class="d-flex h-100 text-center text-bg-dark" style="padding-top:6rem">
-        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column ">
+<body>
+    <nav class="container">
+        <header
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 fixed-top px-3"
+            style="background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 50%, rgba(255,255,255,0) 100%);  ">
+            <div class="col-md-3 mb-2 mb-md-0">
+                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                </a>
+            </div>
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 ">
+                <li><a href="#" class="nav-link px-2"
+                        style="{{ request()->is('/') ? 'text-decoration:underline' : '' }}">Home</a></li>
+                <li><a href="#" class="nav-link px-2  "
+                        style="{{ request()->is('f*') ? 'text-decoration:underline' : '' }}">Features</a>
+                </li>
+                <li><a href="#" class="nav-link px-2"
+                        style="{{ request()->is('p*') ? 'text-decoration:underline' : '' }}">Pricing</a>
+                </li>
+                <li><a href="#" class="nav-link px-2"
+                        style="{{ request()->is('fa*') ? 'text-decoration:underline' : '' }}">FAQs</a></li>
+                <li><a href="#" class="nav-link px-2"
+                        style="{{ request()->is('ab*') ? 'text-decoration:underline' : '' }}">About</a></li>
+            </ul>
+
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2">Login</button>
+                <button type="button" class="btn btn-primary">Sign-up</button>
+            </div>
+        </header>
+    </nav>
+
+    <div class="d-flex h-100 text-center"
+        style="padding-top:6rem; background-image:url({{ asset('images/app/ZiO1i56gJbwduUeaoQDW.jpg') }}); background-repeat:no-repeat; background-size:cover; background-position:center">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
             <main class="px-3 align-items-center mt-auto">
-                <h1>Cover your page.</h1>
-                <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download,
-                    edit
-                    the text, and add your own fullscreen background photo to make it your own.</p>
-                <p class="lead">
-                    <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
+                <h1 class="text-white " style="text-shadow:0 0 50px black;">IndoJuni</h1>
+                <p class="lead text-white fw-semibold" style="text-shadow:0 0 20px black;">Mudah dan Cepat, Belanja di
+                    IndoJuni!
+                </p>
+                <p class="lead" style="text-shadow: unset">
+                    <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Pelajari Lebih
+                        Lanjut</a>
                 </p>
             </main>
-
-            <footer class="mt-auto text-white-50">
-                <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a
-                        href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
-            </footer>
+            <div class="container mt-auto">
+                <div class="container">
+                    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top ">
+                        <div class="col-md-4 d-flex align-items-center">
+                            <a href="https://getbootstrap.com/" target="_blank"
+                                class="mb-3 me-2 mb-md-0 text-decoration-none lh-1">
+                                <i class="fa-brands fa-bootstrap" style="color: rgba(255,255,255,1);"></i>
+                            </a>
+                            <span class="mb-3 mb-md-0 text-white">&copy; 2023 IndoJuni, Inc</span>
+                        </div>
+                    </footer>
+                </div>
+            </div>
         </div>
     </div>
-@endsection
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
+</body>
 
-@section('scripts')
-@endsection
+</html>
