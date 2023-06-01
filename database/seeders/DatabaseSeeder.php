@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Catalogue;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +22,11 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        Catalogue::create([
+            'name' => 'Indomie Goreng',
+            'price' => 2500,
+            'img' => '0lxKQl2mvqEh70XLvgIA.png',
+        ]);
     }
 }
