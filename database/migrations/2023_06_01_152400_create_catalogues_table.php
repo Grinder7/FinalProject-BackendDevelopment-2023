@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('catalogues', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->ulid()->unique();
+            $table->string('name');
+            $table->integer('price');
+            $table->string('img');
         });
     }
 
