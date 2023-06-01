@@ -6,6 +6,7 @@ namespace App\Modules\Catalogue;
 
 use Illuminate\Database\Eloquent\Collection;
 use App\Modules\Catalogue\CatalogueRepository;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CatalogueService
 {
@@ -19,5 +20,10 @@ class CatalogueService
     public function getAllData(): Collection
     {
         return $this->catalogueRepository->getAllCatalogue();
+    }
+
+    public function getPaginatedCatalogue(int $page, string $column): LengthAwarePaginator
+    {
+        return $this->catalogueRepository->getCataloguePaginated($page, $column);
     }
 }

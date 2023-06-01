@@ -15,7 +15,7 @@ class CatalogueController extends Controller
     }
     public function index()
     {
-        $catalogues = $this->catalogueService->getAllData();
+        $catalogues = $this->catalogueService->getPaginatedCatalogue(6, 'name');
         return view('pages.catalogue', compact('catalogues'));
     }
 }
