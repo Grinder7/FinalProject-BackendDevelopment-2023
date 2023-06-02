@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Catalogue;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -70,6 +71,13 @@ class DatabaseSeeder extends Seeder
             'stock' => 20,
             'price' => 5900,
             'img' => '4Du4uPsa6q5J8xfpLkna.jpg',
+        ]);
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin'),
+            'is_admin' => true,
+
         ]);
     }
 }
