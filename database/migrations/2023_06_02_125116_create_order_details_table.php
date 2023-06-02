@@ -16,8 +16,11 @@ return new class extends Migration
         Schema::create('order_details', function (Blueprint $table) {
             $table->ulid('id')->unique();
             $table->foreignUlid('user_id');
-            $table->foreignUlid('order_id');
+            $table->integer('total');
+            $table->foreignUlid('payment_id');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('payment_id')->references('id')->on('payment_details');
         });
     }
 
