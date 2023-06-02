@@ -14,8 +14,4 @@ class AppController extends Controller
     {
         return view('pages.aboutus');
     }
-    public function checkout()
-    {
-        return view('pages.checkout');
-    }
 }

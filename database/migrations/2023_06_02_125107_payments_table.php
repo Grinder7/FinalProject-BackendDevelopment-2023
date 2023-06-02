@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payment_details', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->ulid('id')->unique();
             $table->foreignUlid('user_id');
             $table->string('firstname');

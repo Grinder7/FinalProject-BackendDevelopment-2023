@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Payment;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -72,12 +73,23 @@ class DatabaseSeeder extends Seeder
             'price' => 5900,
             'img' => '4Du4uPsa6q5J8xfpLkna.jpg',
         ]);
-        User::create([
+        $test_admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
             'is_admin' => true,
 
+        ]);
+        Payment::create([
+            'user_id' => $test_admin->id,
+            'firstname' => 'Admin',
+            'lastname' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'address' => 'Araya Mansion No.8-22',
+            'state' => 'Indonesia',
+            'city' => 'Malang',
+            'zip' => '65154',
+            'remember_detail' => true,
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\App;
@@ -24,7 +25,7 @@ Route::get('catalogue', [ProductController::class, 'index'])->name('catalogue.in
 
 Route::get('aboutus', [AppController::class, 'aboutus'])->name('app.aboutus');
 
-Route::get('checkout', [AppController::class, 'checkout'])->name('app.checkout');
+Route::get('checkout', [PaymentController::class, 'index'])->name('app.checkout')->middleware('auth');
 
 Route::get('logout', [LoginController::class, 'destroy'])->name('logout');
 

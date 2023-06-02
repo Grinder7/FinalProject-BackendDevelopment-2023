@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignUlid('payment_id');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('payment_id')->references('id')->on('payment_details');
+            $table->foreign('payment_id')->references('id')->on('payments');
         });
     }
 
