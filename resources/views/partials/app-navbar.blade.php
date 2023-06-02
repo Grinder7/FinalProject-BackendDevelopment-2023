@@ -10,20 +10,23 @@
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="{{ route('app.home') }}" class="nav-link px-2"
-                    style="{{ request()->is('/') ? 'text-decoration:underline' : '' }}">Home</a></li>
+                    style="{{ Request::is('/') ? 'text-decoration:underline' : '' }}">Home</a></li>
             <li><a href="{{ route('catalogue.index') }}" class="nav-link px-2  "
-                    style="{{ request()->is('catalogue*') ? 'text-decoration:underline' : '' }}">Catalogue</a>
+                    style="{{ Request::is('catalogue*') ? 'text-decoration:underline' : '' }}">Catalogue</a>
             </li>
             {{-- TEMPORARY --}}
             <li><a href="{{ route('app.checkout') }}" class="nav-link px-2"
-                    style="{{ request()->is('checkout*') ? 'text-decoration:underline' : '' }}">About</a></li>
+                    style="{{ Request::is('checkout*') ? 'text-decoration:underline' : '' }}">About</a></li>
         </ul>
 
         <div class="col-md-3 text-end">
             @auth
+                <a href="{{ route('app.checkout') }}" class="btn btn-light me-2">Checkout</a>
+                <a href="{{ route('app.profile') }}" class="btn btn-primary">Profile</a>
             @else
-                <button type="button" class="btn btn-outline-primary me-2">Login</button>
-                <button type="button" class="btn btn-primary">Sign-up</button>
+                <a href="{{ route('login.page') }}" class="btn btn-light me-2">Login</a>
+                {{-- <button type="button" class="btn btn-light me-2">Login</button> --}}
+                <a href="{{ route('register.page') }}" class="btn btn-primary">Sign-up</a>
             @endauth
         </div>
     </header>
