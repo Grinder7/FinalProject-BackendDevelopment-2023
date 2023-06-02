@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('address');
             $table->string('address2')->nullable();
-            $table->string('state');
-            $table->string('city');
             $table->string('zip');
             $table->boolean('remember_detail')->default(false);
             $table->timestamps();

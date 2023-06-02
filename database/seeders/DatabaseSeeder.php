@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
         Product::create([
             'name' => 'Indomie Goreng',
             'stock' => 10,
@@ -85,9 +84,7 @@ class DatabaseSeeder extends Seeder
             'firstname' => 'Admin',
             'lastname' => 'Admin',
             'email' => 'admin@gmail.com',
-            'address' => 'Araya Mansion No.8-22',
-            'state' => 'Indonesia',
-            'city' => 'Malang',
+            'address' => 'Araya Mansion No.8-22, Malang',
             'zip' => '65154',
             'remember_detail' => true,
         ]);
