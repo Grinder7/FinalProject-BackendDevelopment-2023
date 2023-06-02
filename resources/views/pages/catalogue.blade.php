@@ -17,11 +17,11 @@
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                @foreach ($catalogues as $catalogue)
+                @foreach ($products as $product)
                     <div class="col">
                         <div class="card shadow-sm">
-                            @if ($catalogue->img)
-                                <img src="{{ asset($catalogue->img) }}" alt="cover" height="225"
+                            @if ($product->img)
+                                <img src="{{ asset($product->img) }}" alt="cover" height="225"
                                     style="object-fit: contain">
                             @else
                                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
@@ -33,10 +33,10 @@
                                 </svg>
                             @endif
                             <div class="card-body">
-                                <p class="card-text">{{ $catalogue->name }}</p>
+                                <p class="card-text">{{ $product->name }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <small class="text-body-secondary">Rp
-                                        {{ number_format($catalogue->price, 2, ',', '.') }}</small>
+                                        {{ number_format($product->price, 2, ',', '.') }}</small>
                                     <button type="button" class="btn btn-sm btn-outline-secondary"><i
                                             class="fa-solid fa-plus"></i></button>
                                 </div>
@@ -47,7 +47,7 @@
             </div>
             <div class="row p-3">
                 <div class="col">
-                    {{ $catalogues->links() }}
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>

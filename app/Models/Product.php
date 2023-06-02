@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Catalogue extends Model
+class Product extends Model
 {
     use HasFactory, HasUlids;
     protected $fillable = [
@@ -15,16 +15,16 @@ class Catalogue extends Model
         'price',
         'img',
     ];
-    protected $primaryKey = "uuid";
+    protected $primaryKey = "id";
     protected $guarded = [
-        'uuid'
+        'id'
     ];
     public $timestamps = false;
 
     public function img(): Attribute
     {
         return Attribute::make(
-            get: fn ($img) => config('catalogue.img_dir') . '/' . $img
+            get: fn ($img) => config('product.img_dir') . '/' . $img
         );
     }
 }

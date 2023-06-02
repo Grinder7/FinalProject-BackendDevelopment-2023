@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\CatalogueController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AppController::class, 'home'])->name('app.home');
 
-Route::get('catalogue', [CatalogueController::class, 'index'])->name('catalogue.index');
+Route::get('catalogue', [ProductController::class, 'index'])->name('catalogue.index');
 
 Route::get('aboutus', [AppController::class, 'aboutus'])->name('app.aboutus');
 
