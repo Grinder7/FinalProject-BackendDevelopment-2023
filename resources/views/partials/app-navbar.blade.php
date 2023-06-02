@@ -3,8 +3,8 @@
         class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 fixed-top px-3"
         style="background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 50%, rgba(255,255,255,0) 100%);">
         <div class="col-md-3 mb-2 mb-md-0 align-items-center">
-            <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-                <img src="{{ asset('images/app/xyXVxK19116nI6TPT5KF.png') }}" alt="logo" height="55">
+            <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none align-items-center">
+                <img src="{{ asset('images/app/xyXVxK19116nI6TPT5KF.png') }}" alt="logo" height="40">
             </a>
         </div>
 
@@ -15,14 +15,14 @@
                     style="{{ Request::is('catalogue*') ? 'text-decoration:underline' : '' }}">Catalogue</a>
             </li>
             {{-- TEMPORARY --}}
-            <li><a href="{{ route('app.checkout') }}" class="nav-link px-2"
-                    style="{{ Request::is('checkout*') ? 'text-decoration:underline' : '' }}">About</a></li>
+            <li><a href="{{ route('app.aboutus') }}" class="nav-link px-2"
+                    style="{{ Request::is('aboutus*') ? 'text-decoration:underline' : '' }}">About Us</a></li>
         </ul>
 
         <div class="col-md-3 text-end">
             @auth
-                <a href="{{ route('app.checkout') }}" class="btn btn-light me-2">Checkout</a>
-                <a href="{{ route('app.profile') }}" class="btn btn-primary">Profile</a>
+                <a href="{{ route('app.checkout') }}" class="btn btn-sm"><i class="fa-solid fa-cart-shopping"></i></a>
+                {{-- <a href="{{ route('app.profile') }}" class="btn btn-primary">Profile</a> --}}
             @else
                 <a href="{{ route('login.page') }}" class="btn btn-light me-2">Login</a>
                 {{-- <button type="button" class="btn btn-light me-2">Login</button> --}}

@@ -25,7 +25,7 @@ class UserService
             "email" => $validated["email"],
             "password" => $validated["password"]
         ];
-        $rememberMe = boolval($validated["remember"] ?? 0);
+        $rememberMe = boolval($validated["remember-me"] ?? 0);
         $success = Auth::attempt($credentials, $rememberMe);
         if ($success) {
             session()->regenerate();

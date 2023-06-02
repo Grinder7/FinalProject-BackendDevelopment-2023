@@ -10,9 +10,9 @@ class AppController extends Controller
     {
         return view('pages.home');
     }
-    public function about()
+    public function aboutus()
     {
-        return view('pages.about');
+        return view('pages.aboutus');
     }
     public function checkout()
     {

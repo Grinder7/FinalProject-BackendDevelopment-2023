@@ -22,6 +22,8 @@ Route::get('/', [AppController::class, 'home'])->name('app.home');
 
 Route::get('catalogue', [CatalogueController::class, 'index'])->name('catalogue.index');
 
+Route::get('aboutus', [AppController::class, 'aboutus'])->name('app.aboutus');
+
 Route::get('checkout', [AppController::class, 'checkout'])->name('app.checkout');
 
 Route::middleware('guest')->group(function () {
