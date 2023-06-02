@@ -165,29 +165,11 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12">
+                                <div class="col-md-9">
                                     <label for="address2" class="form-label">Alamat 2 <span
                                             class="text-body-secondary">(Opsional)</span></label>
                                     <input type="text" class="form-control" id="address2"
                                         placeholder="Apartment or suite" value="{{ $payments[0]->address2 }}">
-                                </div>
-
-                                <div class="col-md-5">
-                                    <label for="country" class="form-label">Negara</label>
-                                    <select class="form-select" id="country" disabled>
-                                        <option>Indonesia</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="state" class="form-label">Kota/Kabupaten</label>
-                                    <select class="form-select" id="state" required>
-                                        <option value="">Pilih...</option>
-                                        <option>Malang</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Mohon masukkan kota/kabupaten anda.
-                                    </div>
                                 </div>
 
                                 <div class="col-md-3">

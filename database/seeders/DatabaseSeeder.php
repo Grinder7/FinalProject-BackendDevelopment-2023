@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
             'img' => '4Du4uPsa6q5J8xfpLkna.jpg',
         ]);
         $test_admin = User::create([
-            'name' => 'Admin',
+            'username' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
             'is_admin' => true,
