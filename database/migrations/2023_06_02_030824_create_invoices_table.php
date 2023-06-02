@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->ulid('invoiceId');
-            $table->string('user_username');
-            $table->unsignedBigInteger('stock_id');
+            $table->char('username');
+            $table->char('catalogue_ulid');
             $table->unsignedInteger('amount');
-            $table->foreign('stock_id')->references('id')->on('stocks');
-            $table->foreign('user_username')->references('username')->on('users');
+            $table->foreign('catalogue_ulid')->references('ulid')->on('catalogues');
             
         });
     }

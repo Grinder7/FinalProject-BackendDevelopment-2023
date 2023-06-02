@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->ulid('id');
-            $table->string('username');
-            $table->string('password');
+        Schema::create('catalogues', function (Blueprint $table) {
+            $table->ulid('ulid')->unique();
+            $table->string('name');
+            $table->integer('stock')->default(0);
+            $table->integer('price');
+            $table->string('img');
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('catalogues');
     }
 };
