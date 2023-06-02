@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignUlid('product_id');
             $table->integer('quantity');
             $table->timestamps();
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('order_id')->references('id')->on('order_details');
             $table->foreign('product_id')->references('id')->on('products');
         });
     }
