@@ -85,20 +85,16 @@
         <div class="container">
             <main>
                 <div class="py-5 text-center">
-                    <h2>Checkout form</h2>
-                    <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required
-                        form
-                        group has a validation state that can be triggered by attempting to submit the form without
-                        completing
-                        it.</p>
+                    <h2>Checkout</h2>
+                    <p class="lead">Lengkapi Formulir di Bawah Sesuai Identitas Anda</p>
                 </div>
 
                 <div class="row g-5">
                     <div class="col-md-5 col-lg-4 order-md-last">
                         <h4 class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="text-primary">Your cart</span>
+                            <span class="text-primary">Keranjang Anda</span>
                             {{-- PAKE PHP COUNT() --}}
-                            <span class="badge bg-primary rounded-pill">3</span>
+                            <span class="badge bg-primary rounded-pill">{{ count(['aa', 'bb']) }}</span>
                         </h4>
                         <ul class="list-group mb-3">
                             <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -122,45 +118,32 @@
                                 </div>
                                 <span class="text-body-secondary">$5</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-                                <div class="text-success">
-                                    <h6 class="my-0">Promo code</h6>
-                                    <small>EXAMPLECODE</small>
-                                </div>
-                                <span class="text-success">−$5</span>
-                            </li>
                             <li class="list-group-item d-flex justify-content-between">
-                                <span>Total (USD)</span>
+                                <span>Total (IDR)</span>
                                 <strong>$20</strong>
                             </li>
                         </ul>
-
-                        <form class="card p-2">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Promo code">
-                                <button type="submit" class="btn btn-secondary">Redeem</button>
-                            </div>
-                        </form>
                     </div>
                     <div class="col-md-7 col-lg-8">
-                        <h4 class="mb-3">Billing address</h4>
+                        <h4 class="mb-3">Alamat Pembayaran</h4>
                         <form class="needs-validation" novalidate>
+                            @csrf
                             <div class="row g-3">
                                 <div class="col-sm-6">
-                                    <label for="firstName" class="form-label">First name</label>
+                                    <label for="firstName" class="form-label">Nama Depan</label>
                                     <input type="text" class="form-control" id="firstName" placeholder="" value=""
                                         required>
                                     <div class="invalid-feedback">
-                                        Valid first name is required.
+                                        Nama depan harus valid.
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Last name</label>
+                                    <label for="lastName" class="form-label">Nama Belakang</label>
                                     <input type="text" class="form-control" id="lastName" placeholder="" value=""
                                         required>
                                     <div class="invalid-feedback">
-                                        Valid last name is required.
+                                        Nama belakang harus valid.
                                     </div>
                                 </div>
 
@@ -178,56 +161,52 @@
 
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email <span
-                                            class="text-body-secondary">(Optional)</span></label>
+                                            class="text-body-secondary">(Opsional)</span></label>
                                     <input type="email" class="form-control" id="email" placeholder="you@example.com">
                                     <div class="invalid-feedback">
-                                        Please enter a valid email address for shipping updates.
+                                        Mohon masukkan email yang valid untuk pembaruan pengiriman.
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="address" class="form-label">Address</label>
+                                    <label for="address" class="form-label">Alamat</label>
                                     <input type="text" class="form-control" id="address" placeholder="1234 Main St"
                                         required>
                                     <div class="invalid-feedback">
-                                        Please enter your shipping address.
+                                        Mohon masukkan alamat pengiriman anda.
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="address2" class="form-label">Address 2 <span
-                                            class="text-body-secondary">(Optional)</span></label>
+                                    <label for="address2" class="form-label">Alamat 2 <span
+                                            class="text-body-secondary">(Opsional)</span></label>
                                     <input type="text" class="form-control" id="address2"
                                         placeholder="Apartment or suite">
                                 </div>
 
                                 <div class="col-md-5">
-                                    <label for="country" class="form-label">Country</label>
-                                    <select class="form-select" id="country" required>
-                                        <option value="">Choose...</option>
-                                        <option>United States</option>
+                                    <label for="country" class="form-label">Negara</label>
+                                    <select class="form-select" id="country" disabled>
+                                        <option>Indonesia</option>
                                     </select>
-                                    <div class="invalid-feedback">
-                                        Please select a valid country.
-                                    </div>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="state" class="form-label">State</label>
+                                    <label for="state" class="form-label">Kota/Kabupaten</label>
                                     <select class="form-select" id="state" required>
-                                        <option value="">Choose...</option>
-                                        <option>California</option>
+                                        <option value="">Pilih...</option>
+                                        <option>Malang</option>
                                     </select>
                                     <div class="invalid-feedback">
-                                        Please provide a valid state.
+                                        Mohon masukkan kota/kabupaten anda.
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label for="zip" class="form-label">Zip</label>
+                                    <label for="zip" class="form-label">Kode Pos</label>
                                     <input type="text" class="form-control" id="zip" placeholder="" required>
                                     <div class="invalid-feedback">
-                                        Zip code required.
+                                        Kode pos diperlukan.
                                     </div>
                                 </div>
                             </div>
@@ -243,24 +222,24 @@
 
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="save-info">
-                                <label class="form-check-label" for="save-info">Save this information for next
-                                    time</label>
+                                <label class="form-check-label" for="save-info">Simpan informasi ini untuk
+                                    kedepannya</label>
                             </div>
 
                             <hr class="my-4">
 
-                            <h4 class="mb-3">Payment</h4>
+                            <h4 class="mb-3">Pembayaran</h4>
 
                             <div class="my-3">
                                 <div class="form-check">
                                     <input id="credit" name="paymentMethod" type="radio" class="form-check-input"
                                         checked required>
-                                    <label class="form-check-label" for="credit">Credit card</label>
+                                    <label class="form-check-label" for="credit">Kartu Kredit</label>
                                 </div>
                                 <div class="form-check">
                                     <input id="debit" name="paymentMethod" type="radio" class="form-check-input"
                                         required>
-                                    <label class="form-check-label" for="debit">Debit card</label>
+                                    <label class="form-check-label" for="debit">Kartu Debit</label>
                                 </div>
                                 <div class="form-check">
                                     <input id="paypal" name="paymentMethod" type="radio" class="form-check-input"
@@ -271,28 +250,28 @@
 
                             <div class="row gy-3">
                                 <div class="col-md-6">
-                                    <label for="cc-name" class="form-label">Name on card</label>
+                                    <label for="cc-name" class="form-label">Nama pada kartu</label>
                                     <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                                    <small class="text-body-secondary">Full name as displayed on card</small>
+                                    <small class="text-body-secondary">Nama Lengkap sesuai kartu</small>
                                     <div class="invalid-feedback">
-                                        Name on card is required
+                                        Nama pada kartu diperlukan
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="cc-number" class="form-label">Credit card number</label>
+                                    <label for="cc-number" class="form-label">Nomor Kartu</label>
                                     <input type="text" class="form-control" id="cc-number" placeholder="" required>
                                     <div class="invalid-feedback">
-                                        Credit card number is required
+                                        Nomor kartu diperlukan
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label for="cc-expiration" class="form-label">Expiration</label>
+                                    <label for="cc-expiration" class="form-label">Masa Berlaku</label>
                                     <input type="text" class="form-control" id="cc-expiration" placeholder=""
                                         required>
                                     <div class="invalid-feedback">
-                                        Expiration date required
+                                        Tanggal kadaluarsa diperlukan
                                     </div>
                                 </div>
 
@@ -300,7 +279,7 @@
                                     <label for="cc-cvv" class="form-label">CVV</label>
                                     <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
                                     <div class="invalid-feedback">
-                                        Security code required
+                                        CVV diperlukan
                                     </div>
                                 </div>
                             </div>

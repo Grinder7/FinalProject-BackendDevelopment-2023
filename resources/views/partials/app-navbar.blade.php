@@ -22,13 +22,22 @@
         <div class="col-md-3 text-end">
             @auth
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-end mb-md-0 ">
-                    <li>
+                    <li class="d-flex align-items-center">
                         <a href="{{ route('app.checkout') }}" class="me-3"><i class="fa-solid fa-cart-shopping fa-xl "
                                 style="color: rgb(255,255,255);{{ Request::is('checkout*') ? 'text-decoration:underline;text-underline-offset: 0.25rem;' : '' }}"></i></a>
                     </li>
                     <li>
-                        <a href="{{ route('logout') }}" class="me-2"><i class="fa-solid fa-circle-user fa-xl"
-                                style="color: rgb(255,255,255)"></i></a>
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa-solid fa-circle-user fa-xl" style="color: rgb(255,255,255)"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             @else
