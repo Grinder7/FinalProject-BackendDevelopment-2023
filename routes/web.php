@@ -26,6 +26,8 @@ Route::get('aboutus', [AppController::class, 'aboutus'])->name('app.aboutus');
 
 Route::get('checkout', [AppController::class, 'checkout'])->name('app.checkout');
 
+Route::get('logout', [LoginController::class, 'destroy'])->name('logout');
+
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'index'])->name('login.page');
     Route::post('login', [LoginController::class, 'store'])->name('login');

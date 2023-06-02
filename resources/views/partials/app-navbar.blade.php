@@ -21,8 +21,16 @@
 
         <div class="col-md-3 text-end">
             @auth
-                <a href="{{ route('app.checkout') }}" class="btn btn-sm"><i class="fa-solid fa-cart-shopping"></i></a>
-                {{-- <a href="{{ route('app.profile') }}" class="btn btn-primary">Profile</a> --}}
+                <ul class="nav col-12 col-md-auto mb-2 justify-content-end mb-md-0 ">
+                    <li>
+                        <a href="{{ route('app.checkout') }}" class="me-3"><i class="fa-solid fa-cart-shopping fa-xl "
+                                style="color: rgb(255,255,255);{{ Request::is('checkout*') ? 'text-decoration:underline;text-underline-offset: 0.25rem;' : '' }}"></i></a>
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}" class="me-2"><i class="fa-solid fa-circle-user fa-xl"
+                                style="color: rgb(255,255,255)"></i></a>
+                    </li>
+                </ul>
             @else
                 <a href="{{ route('login.page') }}" class="btn btn-light me-2">Login</a>
                 {{-- <button type="button" class="btn btn-light me-2">Login</button> --}}

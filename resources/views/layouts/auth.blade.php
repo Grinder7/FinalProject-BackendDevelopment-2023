@@ -19,7 +19,7 @@
     @yield('styles')
 </head>
 
-<body class="text-center">
+<body class="text-center bg-body-tertiary">
     @yield('content')
 
     @yield('scripts')
