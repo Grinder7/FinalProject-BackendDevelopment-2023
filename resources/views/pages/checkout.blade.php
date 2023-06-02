@@ -131,8 +131,8 @@
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <label for="firstName" class="form-label">Nama Depan</label>
-                                    <input type="text" class="form-control" id="firstName" placeholder="" value=""
-                                        required>
+                                    <input type="text" class="form-control" id="firstName" placeholder=""
+                                        value="{{ $payments[0]->firstname }}" required>
                                     <div class="invalid-feedback">
                                         Nama depan harus valid.
                                     </div>
@@ -140,8 +140,8 @@
 
                                 <div class="col-sm-6">
                                     <label for="lastName" class="form-label">Nama Belakang</label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="" value=""
-                                        required>
+                                    <input type="text" class="form-control" id="lastName" placeholder=""
+                                        value="{{ $payments[0]->lastname }}" required>
                                     <div class="invalid-feedback">
                                         Nama belakang harus valid.
                                     </div>
@@ -162,7 +162,8 @@
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email <span
                                             class="text-body-secondary">(Opsional)</span></label>
-                                    <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                                    <input type="email" class="form-control" id="email" placeholder="you@example.com"
+                                        value="{{ $payments[0]->email }}">
                                     <div class="invalid-feedback">
                                         Mohon masukkan email yang valid untuk pembaruan pengiriman.
                                     </div>
@@ -171,7 +172,7 @@
                                 <div class="col-12">
                                     <label for="address" class="form-label">Alamat</label>
                                     <input type="text" class="form-control" id="address" placeholder="1234 Main St"
-                                        required>
+                                        value="{{ $payments[0]->address }}" required>
                                     <div class="invalid-feedback">
                                         Mohon masukkan alamat pengiriman anda.
                                     </div>
@@ -181,7 +182,7 @@
                                     <label for="address2" class="form-label">Alamat 2 <span
                                             class="text-body-secondary">(Opsional)</span></label>
                                     <input type="text" class="form-control" id="address2"
-                                        placeholder="Apartment or suite">
+                                        placeholder="Apartment or suite" value="{{ $payments[0]->address2 }}">
                                 </div>
 
                                 <div class="col-md-5">
@@ -204,7 +205,8 @@
 
                                 <div class="col-md-3">
                                     <label for="zip" class="form-label">Kode Pos</label>
-                                    <input type="text" class="form-control" id="zip" placeholder="" required>
+                                    <input type="text" class="form-control" id="zip" placeholder=""
+                                        value="{{ $payments[0]->zip }}"required>
                                     <div class="invalid-feedback">
                                         Kode pos diperlukan.
                                     </div>
@@ -213,15 +215,9 @@
 
                             <hr class="my-4">
 
-                            {{-- <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="same-address">
-                                <label class="form-check-label" for="same-address">Shipping address is the same as my
-                                    billing
-                                    address</label>
-                            </div> --}}
-
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="save-info">
+                                <input type="checkbox" class="form-check-input" id="save-info"
+                                    @if ($payments[0]->remember_detail) checked @endif>
                                 <label class="form-check-label" for="save-info">Simpan informasi ini untuk
                                     kedepannya</label>
                             </div>
@@ -286,7 +282,7 @@
 
                             <hr class="my-4">
 
-                            <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                            <button class="w-100 btn btn-primary btn-lg" type="submit">Lanjutkan Pembayaran</button>
                         </form>
                     </div>
                 </div>
@@ -315,5 +311,4 @@
                 })
             })()
         </script>
-
     @endsection

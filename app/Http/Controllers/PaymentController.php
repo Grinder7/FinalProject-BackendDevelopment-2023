@@ -16,6 +16,19 @@ class PaymentController extends Controller
     public function index()
     {
         $payments = $this->paymentService->getPaymentById(Auth::id());
-        return view('pages.checkout', compact('payments'));
+        if ($payments == null) {
+            $payments = [
+                'firstname' => '',
+                'lastname' => '',
+                'email' => '',
+                'address' => '',
+                'address2' => '',
+                'state' => '',
+                'city' => '',
+                'zip' => '',
+                'remember_detail' => false
+            ];
+        }
+        return view('pages.checkout')->with(compact('payments'));
     }
 }
