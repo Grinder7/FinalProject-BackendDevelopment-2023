@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AppController::class, 'home'])->name('app.home');
 
 Route::get('catalogue', [ProductController::class, 'index'])->name('catalogue.index');
-Route::post('catalogue', [ShoppingController::class], 'store')->name('session.store');
+Route::post('catalogue', [ShoppingController::class, 'store'])->name('cart.store');
 
 Route::get('aboutus', [AppController::class, 'aboutus'])->name('app.aboutus');
 

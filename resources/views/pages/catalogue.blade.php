@@ -37,8 +37,12 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <small class="text-body-secondary">Rp
                                         {{ number_format($product->price, 2, ',', '.') }}</small>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"><i
-                                            class="fa-solid fa-plus"></i></button>
+                                    <form action="{{ route('cart.store') }}" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary"
+                                            value="{{ $product->id }}" name="product_id"><i
+                                                class="fa-solid fa-plus"></i></button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
