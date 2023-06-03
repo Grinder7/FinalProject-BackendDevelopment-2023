@@ -20,9 +20,9 @@
 
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="row ">
                 @foreach ($products as $product)
-                    <div class="col">
+                    <div class="col-lg-4 d-flex align-items-stretch mb-3">
                         <div class="card shadow-sm">
                             @if ($product->img)
                                 <img src="{{ asset($product->img) }}" alt="cover" height="225"
@@ -36,9 +36,10 @@
                                         fill="#eceeef" dy=".3em">Image</text>
                                 </svg>
                             @endif
-                            <div class="card-body">
-                                <p class="card-text">{{ $product->name }}</p>
-                                <div class="d-flex justify-content-between align-items-center">
+                            <div class="card-body d-flex flex-column">
+                                <p class="card-text fw-bolder">{{ $product->name }}</p>
+                                <p class="card-text text-body-secondary mb-4">{{ $product->description }}</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
                                     <small class="text-body-secondary">Rp
                                         {{ number_format($product->price, 2, ',', '.') }}</small>
                                     <div>

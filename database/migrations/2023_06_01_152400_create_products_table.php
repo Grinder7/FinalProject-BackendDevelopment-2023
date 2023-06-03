@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('stock')->default(0);
             $table->integer('price');
+            $table->text('description')->nullable();
             $table->string('img');
         });
     }
