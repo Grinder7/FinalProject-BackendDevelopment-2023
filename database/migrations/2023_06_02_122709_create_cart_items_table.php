@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('cart_items', function (Blueprint $table) {
             $table->ulid('id')->unique();
             $table->foreignUlid('session_id');
-            $table->foreignUlid('product_id');
+            $table->foreignid('product_id');
             $table->integer('quantity');
             $table->timestamps();
             $table->foreign('session_id')->references('id')->on('shopping_sessions');

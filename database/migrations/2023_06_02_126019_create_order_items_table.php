@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->ulid('id')->unique();
             $table->foreignUlid('order_id');
-            $table->foreignUlid('product_id');
+            $table->foreignid('product_id');
             $table->integer('quantity');
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('order_details');

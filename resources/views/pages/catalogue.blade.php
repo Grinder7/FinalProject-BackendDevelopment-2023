@@ -37,12 +37,14 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <small class="text-body-secondary">Rp
                                         {{ number_format($product->price, 2, ',', '.') }}</small>
-                                    <form action="{{ route('cart.store') }}" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-outline-secondary"
-                                            value="{{ $product->id }}" name="product_id"><i
-                                                class="fa-solid fa-plus"></i></button>
-                                    </form>
+                                    {{-- <form action="{{ route('cart.store') }}" method="post" target="frame">
+                                        @csrf --}}
+                                    <small class="text-body-secondary me-2">Stok: {{ $product->stock }}</small>
+                                    <input type="hidden" name="quantity" value=1>
+                                    <button type="submit" class="btn btn-sm btn-outline-secondary productAdd"
+                                        value="{{ $product->id }}" name="product_id"><i
+                                            class="fa-solid fa-plus"></i></button>
+                                    {{-- </form> --}}
                                 </div>
                             </div>
                         </div>
@@ -56,8 +58,56 @@
             </div>
         </div>
     </div>
-
+    <iframe name="frame" style="display:none"></iframe>
     </main>
 @endsection
 @section('scripts')
+    <script>
+        const productAdds = document.querySelectorAll('.productAdd');
+        // $productAdds.forEach($productAdd => {
+        //     $productAdd.addEventListener('click', function() {
+        //         $productAdd.innerHTML = '<i class="fa-solid fa-check"></i>';
+        //         $productAdd.disabled = true;
+        //     });
+        // });
+
+        async function fetchData(product_id) {
+            const res = await fetch('http://localhost:8000/catalogue', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json, text-plain, */*",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify({
+                        'product_id': product_id,
+                        'quantity': 1
+                    })
+                })
+                .then((response) => response.json());
+            return res;
+            // let data = await res.json();
+            // data = JSON.parse(data);
+            // return data;
+        };
+        productAdds.forEach(productAdd => {
+            productAdd.addEventListener('click', async function() {
+                productAdd.innerHTML = '<i class="fa-solid fa-arrow-rotate-right fa-spin"></i>';
+                productAdd.disabled = true;
+                const response = await fetchData(this.value);
+                productAdd.innerHTML = '<i class="fa-solid fa-plus"></i>';
+                productAdd.disabled = false;
+                // console.log(response)
+                // if (response.success == true) {
+                //     productAdd.innerHTML = '<i class="fa-solid fa-check"></i>';
+                // } else {
+                //     productAdd.innerHTML = '<i class="fa-solid fa-plus"></i>';
+                //     productAdd.disabled = false;
+                // }
+            });
+        });
+        // fetchData();
+    </script>
 @endsection
