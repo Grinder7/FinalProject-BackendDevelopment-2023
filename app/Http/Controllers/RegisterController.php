@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
 use App\Modules\User\UserService;
-use App\Providers\RouteServiceProvider;
 
 class RegisterController extends Controller
 {

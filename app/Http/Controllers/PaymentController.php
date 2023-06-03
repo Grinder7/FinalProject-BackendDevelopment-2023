@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Modules\Payment\PaymentService;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PDO;
 
 class PaymentController extends Controller
 {
