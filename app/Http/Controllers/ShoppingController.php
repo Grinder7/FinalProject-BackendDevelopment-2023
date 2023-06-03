@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CartItemRequest;
 use App\Modules\ShoppingCart\CartItem\CartItemService;
 use App\Modules\ShoppingCart\ShoppingSession\ShoppingSessionService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class ShoppingController extends Controller
@@ -18,21 +19,28 @@ class ShoppingController extends Controller
     }
     public function storeCart(CartItemRequest $request)
     {
-        $validated =  $request->validated();
-        $success1 = $this->cartItemService->addProduct($validated);
-        if ($success1) {
-            $json = Response::json([
-                'success' => true,
-                'message' => 'Successfully add to cart',
-                'data' => $validated
-            ], 200);
-        } else {
-            $json = Response::json([
-                'success' => false,
-                'message' => 'Failed to add to cart',
-                'data' => $validated
-            ], 400);
+        if (Auth::check()) {
+
+            $validated =  $request->validated();
+            $success1 = $this->cartItemService->addProduct($validated);
+            if ($success1) {
+                $json = Response::json([
+                    'success' => true,
+                    'message' => 'Successfully add to cart',
+                    'data' => $validated
+                ], 200);
+            } else {
+                $json = Response::json([
+                    'success' => false,
+                    'message' => 'Failed to add to cart',
+                    'data' => $validated
+                ], 400);
+            }
+            return $json;
         }
-        return $json;
+        return Response::json([
+            'success' => false,
+            'message' => 'Please login first'
+        ], 400);
     }
 }
