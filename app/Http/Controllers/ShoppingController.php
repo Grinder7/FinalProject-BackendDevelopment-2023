@@ -21,7 +21,6 @@ class ShoppingController extends Controller
     {
         $validated =  $request->validated();
         $success = $this->cartItemService->addProduct($validated);
-        dd($success);
         if ($success) {
             $json = Response::json([
                 'success' => true,

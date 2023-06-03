@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\ShoppingSessionRequest;
 use App\Modules\ShoppingCart\ShoppingSession\ShoppingSessionService;
 use App\Modules\User\UserService;
 use App\Providers\RouteServiceProvider;
@@ -24,7 +23,7 @@ class LoginController extends Controller
     {
         return view('pages.auth.login');
     }
-    public function createCart(ShoppingSessionRequest $request)
+    public function createCart(Request $request)
     {
         $validated = $request->validate([
             'user_id' => 'required|exists:users,id',
@@ -52,7 +51,7 @@ class LoginController extends Controller
         $success = $this->userService->login($request->validated(), $request->throttleKey());
         if ($success) {
             // Add Shopping Session to Database
-            $requestCart = ShoppingSessionRequest::create(route('login.createCart'), 'POST', [
+            $requestCart = Request::create(route('login'), 'POST', [
                 'user_id' => Auth::user()->id,
                 'total' => 0
             ]);

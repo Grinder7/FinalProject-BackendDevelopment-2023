@@ -30,7 +30,6 @@ Route::get('aboutus', [AppController::class, 'aboutus'])->name('app.aboutus');
 Route::get('checkout', [PaymentController::class, 'index'])->name('app.checkout')->middleware('auth');
 
 Route::get('logout', [LoginController::class, 'destroy'])->name('logout');
-Route::post('login/createCart', [ShoppingController::class, 'createCart'])->name('login.createCart');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'index'])->name('login.page');
