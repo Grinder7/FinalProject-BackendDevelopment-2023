@@ -96,7 +96,7 @@
                 if (response.success == true) {
                     alertify.success(response.message);
                 } else {
-                    alertify.error('Error message');
+                    alertify.error(response.message);
                 }
             });
         });

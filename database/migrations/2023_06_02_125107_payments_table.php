@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('zip');
             $table->boolean('remember_detail')->default(false);
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 

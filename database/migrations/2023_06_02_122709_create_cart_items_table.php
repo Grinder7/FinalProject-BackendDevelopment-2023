@@ -19,8 +19,8 @@ return new class extends Migration
             $table->foreignid('product_id');
             $table->integer('quantity');
             $table->timestamps();
-            $table->foreign('session_id')->references('id')->on('shopping_sessions');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('session_id')->references('id')->on('shopping_sessions')->cascadeOnDelete();
+            $table->foreign('product_id')->references('id')->on('products')->cascadeOnDelete();
         });
     }
 

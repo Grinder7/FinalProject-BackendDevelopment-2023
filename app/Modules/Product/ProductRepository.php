@@ -18,4 +18,8 @@ class ProductRepository
     {
         return Product::orderby($column, 'desc')->paginate($page);
     }
+    public function getById(int $id): Product
+    {
+        return Product::find($id);
+    }
 }

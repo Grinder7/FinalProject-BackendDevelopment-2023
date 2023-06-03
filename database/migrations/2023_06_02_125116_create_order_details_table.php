@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('total');
             $table->foreignUlid('payment_id');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('payment_id')->references('id')->on('payments');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('payment_id')->references('id')->on('payments')->cascadeOnDelete();
         });
     }
 
