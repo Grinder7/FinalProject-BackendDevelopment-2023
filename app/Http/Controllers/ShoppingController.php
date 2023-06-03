@@ -37,16 +37,4 @@ class ShoppingController extends Controller
         }
         return $json;
     }
-    public function createCart(ShoppingSessionRequest $requestID)
-    {
-        $validated = $requestID->validated();
-        $this->shoppingSessionService->create($validated);
-        dd($validated);
-        $json = Response::json([
-            'success' => true,
-            'message' => 'Successfully create cart',
-            'data' => $requestID
-        ], 200);
-        return $json;
-    }
 }

@@ -21,4 +21,8 @@ class ShoppingSessionService
     {
         return $this->shoppingSessionRepository->create($data);
     }
+    public function getByUserId(string $uid): ShoppingSession
+    {
+        return $this->shoppingSessionRepository->getByUserId($uid);
+    }
 }

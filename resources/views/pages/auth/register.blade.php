@@ -96,7 +96,7 @@
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control @error('password') is-invalid @enderror" id="floatingPassword"
+                <input type="password" class="form-control @error('password') is-invalid @enderror" id="floatingPasswordUp"
                     placeholder="Password" name="password">
                 <label for="floatingPassword">Password</label>
             </div>

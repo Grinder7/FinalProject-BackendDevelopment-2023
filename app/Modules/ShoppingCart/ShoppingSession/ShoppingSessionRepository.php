@@ -17,4 +17,12 @@ class ShoppingSessionRepository
     {
         return ShoppingSession::create($data);
     }
+    public function getByUserId(string $uid): ShoppingSession
+    {
+        $current_user = ShoppingSession::where('user_id', $uid)->get()->first();
+        if (!$current_user) {
+            $current_user = $this->create(['user_id' => $uid, 'total' => 0]);
+        }
+        return $current_user;
+    }
 }

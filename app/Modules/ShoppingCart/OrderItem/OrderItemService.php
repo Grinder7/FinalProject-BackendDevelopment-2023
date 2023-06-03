@@ -9,7 +9,7 @@ use App\Models\OrderItem;
 class OrderItemService
 {
     public OrderItemRepository $orderItemRepository;
-    public function __construct(OrderItem $orderItemRepository)
+    public function __construct(OrderItemRepository $orderItemRepository)
     {
         $this->orderItemRepository = $orderItemRepository;
     }

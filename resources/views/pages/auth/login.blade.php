@@ -93,11 +93,11 @@
             </div>
             <div class="form-floating">
                 <input type="password" class="form-control @error('password') is-invalid @enderror" id="floatingPassword"
-                    placeholder="Password" name="password">
+                    placeholder="Password" name="password" id="floatingPasswordIn">
                 <label for="floatingPassword">Password</label>
             </div>
 
-            <div class="checkbox mb-3">
+            <div class="checkbox my-3">
                 <label>
                     <input type="checkbox" name="remember-me" value="1"> Remember me
                 </label>

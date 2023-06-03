@@ -30,12 +30,20 @@ class LoginController extends Controller
             'user_id' => 'required|exists:users,id',
             'total' => 'integer'
         ]);
-        $this->shoppingSessionService->create($validated);
-        $json = Response::json([
-            'success' => true,
-            'message' => 'Successfully create cart',
-            'data' => $validated
-        ], 200);
+        $success = $this->shoppingSessionService->getByUserId($validated['user_id']);
+        if ($success) {
+            $json = Response::json([
+                'success' => true,
+                'message' => 'Successfully create cart',
+                'data' => $validated
+            ], 200);
+        } else {
+            $json = Response::json([
+                'success' => false,
+                'message' => 'Failed to create cart',
+                'data' => $validated
+            ], 400);
+        }
         return $json;
     }
     public function store(LoginRequest $request)
