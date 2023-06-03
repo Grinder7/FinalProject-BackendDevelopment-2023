@@ -22,10 +22,9 @@ class RegisterController extends Controller
         $validated = $request->validated();
         $success = $this->userService->register($validated);
         if ($success) {
-            $this->userService->login($validated);
-            return redirect(RouteServiceProvider::HOME)->with('success', 'Successfully register account!');
+            return redirect(route('login.page'))->with('success', 'Successfully register account!');
         } else {
-            return redirect('register.page')->with('error', 'Register failed');
+            return redirect(route('register.page'))->with('error', 'Register failed');
         }
     }
 }

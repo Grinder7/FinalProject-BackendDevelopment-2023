@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ShoppingController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AppController::class, 'home'])->name('app.home');
 
 Route::get('catalogue', [ProductController::class, 'index'])->name('catalogue.index');
+Route::post('catalogue', [ShoppingController::class], 'store')->name('session.store');
 
 Route::get('aboutus', [AppController::class, 'aboutus'])->name('app.aboutus');
 
