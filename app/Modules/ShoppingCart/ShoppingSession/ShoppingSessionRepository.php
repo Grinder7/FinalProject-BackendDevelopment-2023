@@ -34,4 +34,14 @@ class ShoppingSessionRepository
         }
         return false;
     }
+    public function updateTotal(string $uid, int $total): bool
+    {
+        $current_user = ShoppingSession::where('user_id', $uid)->get()->first();
+        if ($current_user) {
+            $current_user->total = $total;
+            $current_user->save();
+            return true;
+        }
+        return false;
+    }
 }

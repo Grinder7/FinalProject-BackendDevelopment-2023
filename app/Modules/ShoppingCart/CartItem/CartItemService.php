@@ -42,6 +42,10 @@ class CartItemService
         if (($cartItem != null) && ($product->stock < $cartItem->quantity + $data['quantity'])) {
             return false;
         }
+        // Update total price in shopping session
+        $shoppingSession->total += $product->price * $data['quantity'];
+        $shoppingSession->save();
+        // Add product to cart
         $addedProduct = $this->cartItemRepository->insertProduct($data);
         return $addedProduct != null;
     }

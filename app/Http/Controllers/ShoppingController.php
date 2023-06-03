@@ -19,8 +19,8 @@ class ShoppingController extends Controller
     public function storeCart(CartItemRequest $request)
     {
         $validated =  $request->validated();
-        $success = $this->cartItemService->addProduct($validated);
-        if ($success) {
+        $success1 = $this->cartItemService->addProduct($validated);
+        if ($success1) {
             $json = Response::json([
                 'success' => true,
                 'message' => 'Successfully add to cart',
