@@ -23,13 +23,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AppController::class, 'home'])->name('app.home');
 
 Route::get('catalogue', [ProductController::class, 'index'])->name('catalogue.index');
-Route::post('catalogue', [ShoppingController::class, 'store'])->name('cart.store');
+Route::post('catalogue', [ShoppingController::class, 'storeCart'])->name('cart.store');
 
 Route::get('aboutus', [AppController::class, 'aboutus'])->name('app.aboutus');
 
 Route::get('checkout', [PaymentController::class, 'index'])->name('app.checkout')->middleware('auth');
 
 Route::get('logout', [LoginController::class, 'destroy'])->name('logout');
+Route::post('login/createCart', [ShoppingController::class, 'createCart'])->name('login.createCart');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'index'])->name('login.page');

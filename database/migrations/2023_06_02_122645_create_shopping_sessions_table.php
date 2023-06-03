@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('shopping_sessions', function (Blueprint $table) {
             $table->ulid('id')->unique();
             $table->foreignUlid('user_id');
-            $table->integer('total');
+            $table->integer('total')->default(0);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

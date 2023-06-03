@@ -13,4 +13,8 @@ class ShoppingSessionRepository
     {
         return ShoppingSession::all();
     }
+    public function create(array $data): ShoppingSession
+    {
+        return ShoppingSession::create($data);
+    }
 }

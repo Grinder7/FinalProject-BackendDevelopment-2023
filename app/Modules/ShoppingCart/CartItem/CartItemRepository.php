@@ -13,4 +13,8 @@ class CartItemRepository
     {
         return CartItem::all();
     }
+    public function insertProduct(array $data): CartItem
+    {
+        return CartItem::create($data);
+    }
 }

@@ -17,4 +17,9 @@ class CartItemService
     {
         return $this->cartItemRepository->getAllData();
     }
+    public function addProduct(array $data)
+    {
+        $addedProduct = $this->cartItemRepository->insertProduct($data);
+        return $addedProduct != null;
+    }
 }

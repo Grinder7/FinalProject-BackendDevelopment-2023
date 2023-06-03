@@ -17,4 +17,8 @@ class ShoppingSessionService
     {
         return $this->shoppingSessionRepository->getAllData();
     }
+    public function create(array $data): ShoppingSession
+    {
+        return $this->shoppingSessionRepository->create($data);
+    }
 }
