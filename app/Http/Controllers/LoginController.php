@@ -71,6 +71,8 @@ class LoginController extends Controller
     }
     public function destroy(Request $request)
     {
+        // Remove Shopping Session from Database
+        $this->shoppingSessionService->deleteByUserId(Auth::user()->id);
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

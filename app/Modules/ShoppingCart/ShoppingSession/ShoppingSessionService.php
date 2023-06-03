@@ -25,4 +25,8 @@ class ShoppingSessionService
     {
         return $this->shoppingSessionRepository->getByUserId($uid);
     }
+    public function deleteByUserId(string $uid): bool
+    {
+        return $this->shoppingSessionRepository->deleteByUserId($uid);
+    }
 }

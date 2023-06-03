@@ -25,4 +25,13 @@ class ShoppingSessionRepository
         }
         return $current_user;
     }
+    public function deleteByUserId(string $uid): bool
+    {
+        $current_user = ShoppingSession::where('user_id', $uid)->get()->first();
+        if ($current_user) {
+            $current_user->delete();
+            return true;
+        }
+        return false;
+    }
 }
