@@ -15,6 +15,14 @@ class CartItemRepository
     }
     public function insertProduct(array $data): CartItem
     {
-        return CartItem::create($data);
+        // Check if product already exist in cart
+        $product = CartItem::where('product_id', $data['product_id'])->where('session_id', $data['session_id'])->get()->first();
+        if ($product) {
+            $product->quantity += $data['quantity'];
+            $product->save();
+            return $product;
+        } else {
+            return CartItem::create($data);
+        }
     }
 }
