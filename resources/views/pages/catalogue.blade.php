@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('title', 'Catalogue - IndoJuni')
+@section('styles')
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+@endsection
 @section('content')
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
@@ -37,14 +41,13 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <small class="text-body-secondary">Rp
                                         {{ number_format($product->price, 2, ',', '.') }}</small>
-                                    {{-- <form action="{{ route('cart.store') }}" method="post" target="frame">
-                                        @csrf --}}
-                                    <small class="text-body-secondary me-2">Stok: {{ $product->stock }}</small>
-                                    <input type="hidden" name="quantity" value=1>
-                                    <button type="submit" class="btn btn-sm btn-outline-secondary productAdd"
-                                        value="{{ $product->id }}" name="product_id"><i
-                                            class="fa-solid fa-plus"></i></button>
-                                    {{-- </form> --}}
+                                    <div>
+                                        <small class="text-body-secondary me-2">Stok: {{ $product->stock }}</small>
+                                        <input type="hidden" name="quantity" value=1>
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary productAdd"
+                                            value="{{ $product->id }}" name="product_id"><i
+                                                class="fa-solid fa-plus"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -62,21 +65,14 @@
     </main>
 @endsection
 @section('scripts')
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script>
-        const productAdds = document.querySelectorAll('.productAdd');
-        // $productAdds.forEach($productAdd => {
-        //     $productAdd.addEventListener('click', function() {
-        //         $productAdd.innerHTML = '<i class="fa-solid fa-check"></i>';
-        //         $productAdd.disabled = true;
-        //     });
-        // });
-
         async function fetchData(product_id) {
             const res = await fetch('http://localhost:8000/catalogue', {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
-                        "Accept": "application/json, text-plain, */*",
+                        "Accept": "application/json",
                         "X-Requested-With": "XMLHttpRequest",
                         "X-CSRF-TOKEN": "{{ csrf_token() }}"
                     },
@@ -88,10 +84,8 @@
                 })
                 .then((response) => response.json());
             return res;
-            // let data = await res.json();
-            // data = JSON.parse(data);
-            // return data;
         };
+        const productAdds = document.querySelectorAll('.productAdd');
         productAdds.forEach(productAdd => {
             productAdd.addEventListener('click', async function() {
                 productAdd.innerHTML = '<i class="fa-solid fa-arrow-rotate-right fa-spin"></i>';
@@ -99,15 +93,12 @@
                 const response = await fetchData(this.value);
                 productAdd.innerHTML = '<i class="fa-solid fa-plus"></i>';
                 productAdd.disabled = false;
-                // console.log(response)
-                // if (response.success == true) {
-                //     productAdd.innerHTML = '<i class="fa-solid fa-check"></i>';
-                // } else {
-                //     productAdd.innerHTML = '<i class="fa-solid fa-plus"></i>';
-                //     productAdd.disabled = false;
-                // }
+                if (response.success == true) {
+                    alertify.success(response.message);
+                } else {
+                    alertify.error('Error message');
+                }
             });
         });
-        // fetchData();
     </script>
 @endsection
