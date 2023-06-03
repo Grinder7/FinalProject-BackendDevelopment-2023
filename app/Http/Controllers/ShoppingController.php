@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CartItemRequest;
-use App\Http\Requests\ShoppingSessionRequest;
 use App\Modules\ShoppingCart\CartItem\CartItemService;
 use App\Modules\ShoppingCart\ShoppingSession\ShoppingSessionService;
 use Illuminate\Support\Facades\Response;
