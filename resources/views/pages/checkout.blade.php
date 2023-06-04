@@ -98,8 +98,15 @@
                             @foreach ($items as $item)
                                 <li class="list-group-item d-flex justify-content-between lh-sm">
                                     <div>
-                                        <h6 class="my-0">{{ $item['product_name'] }}</h6>
-                                        <small class="text-body-secondary">Qty: {{ $item['quantity'] }}</small>
+                                        <h6 class="my-0 pb-2">{{ $item['product_name'] }}</h6>
+                                        <div class="d-inline-flex col-lg-7">
+                                            <label for="product_{{ $item['product_id'] }}" class="form-label pe-2">
+                                                Qty:
+                                            </label>
+                                            <input type="number" min="0" step="1"
+                                                class="form-control form-control-sm" value="{{ $item['quantity'] }}"
+                                                id="product_{{ $item['product_id'] }}">
+                                        </div>
                                     </div>
                                     <span
                                         class="text-body-secondary">Rp{{ number_format($item['total'], 2, ',', '.') }}</span>
