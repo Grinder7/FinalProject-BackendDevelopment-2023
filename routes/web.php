@@ -39,11 +39,13 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('checkout', [CheckoutController::class, 'index'])->name('app.checkout');
     Route::post('checkout', [CheckoutController::class, 'store'])->name('app.checkout');
+    Route::post('checkout/qtyupdate', [CheckoutController::class, 'qtyUpdate'])->name('app.checkout.qtyupdate');
+    Route::post('checkout/deleteitem', [CheckoutController::class, 'deleteItem'])->name('app.checkout.deleteitem');
 });
 
-Route::fallback(function () {
-    return redirect()->route('app.home');
-});
+// Route::fallback(function () {
+//     return redirect()->route('app.home');
+// });
 
 // Route::get('/', function () {
 //     return view('welcome');

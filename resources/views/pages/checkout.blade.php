@@ -78,7 +78,10 @@
             z-index: 1500;
         }
     </style>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
 @endsection
+
 @section('content')
     <div class="containers" style="padding-top:6rem">
         <div class="container">
@@ -92,20 +95,21 @@
                     <div class="col-md-5 col-lg-4 order-md-last">
                         <h4 class="d-flex justify-content-between align-items-center mb-3">
                             <span class="text-primary">Keranjang Anda</span>
-                            <span class="badge bg-primary rounded-pill">{{ count($items) }}</span>
+                            <span class="badge bg-primary rounded-pill">{{ $totalItems }}</span>
                         </h4>
                         <ul class="list-group mb-3">
                             @foreach ($items as $item)
                                 <li class="list-group-item d-flex justify-content-between lh-sm">
                                     <div>
                                         <h6 class="my-0 pb-2">{{ $item['product_name'] }}</h6>
-                                        <div class="d-inline-flex col-lg-7 align-items-center">
+                                        <div class="d-inline-flex col-lg-9 align-items-center">
                                             <label for="product_{{ $item['product_id'] }}" class="form-label pe-2">
                                                 Qty:
                                             </label>
                                             <input type="number" min="0" step="1"
-                                                class="form-control form-control-sm" value="{{ $item['quantity'] }}"
-                                                id="product_{{ $item['product_id'] }}">
+                                                class="form-control form-control-sm quantity-form"
+                                                value="{{ $item['quantity'] }}" id="product_{{ $item['product_id'] }}">
+                                            <i class="fa-solid fa-trash-can ms-3 delete-item" style="cursor: pointer;"></i>
                                         </div>
                                     </div>
                                     <span
@@ -126,8 +130,8 @@
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <label for="firstName" class="form-label">Nama Depan</label>
-                                    <input type="text" class="form-control" id="firstName" placeholder=""
-                                        value="{{ $payments[0]->firstname }}" required>
+                                    <input type="text" class="form-control" id="firstName" name="firstName"
+                                        placeholder="" value="{{ $payment[0]->firstname }}" required>
                                     <div class="invalid-feedback">
                                         Nama depan harus valid.
                                     </div>
@@ -250,7 +254,8 @@
         </div>
     @endsection
     @section('scripts')
-        <script>
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+        <script type="text/javascript">
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (() => {
                 'use strict'
@@ -270,5 +275,68 @@
                     }, false)
                 })
             })()
+            // Variable to store the total item
+            let totalItems = {{ $totalItems }};
+
+            // Check if the quantity is changed
+            const quantityForms = document.querySelectorAll('.quantity-form');
+            quantityForms.forEach((quantityForm) => {
+                quantityForm.addEventListener('change', async function() {
+                    const res = await fetch("{{ route('app.checkout.qtyupdate') }}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        },
+                        body: JSON.stringify({
+                            product_id: quantityForm.id.split('_')[1],
+                            quantity: quantityForm.value
+                        })
+                    });
+                    const data = await res.json();
+                    if (data.success == true) {
+                        alertify.success(data.message);
+                    } else {
+                        // Change DOM
+                        quantityForm.value = data.quantity;
+                        alertify.error(data.message);
+                    }
+                })
+            });
+            // Check if the user want to delete the item
+            const deleteItems = document.querySelectorAll('.delete-item');
+            deleteItems.forEach((deleteItem) => {
+                deleteItem.addEventListener('click', async function() {
+                    const res = await fetch("{{ route('app.checkout.deleteitem') }}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        },
+                        body: JSON.stringify({
+                            product_id: deleteItem.parentElement.querySelector(
+                                '.quantity-form').id.split('_')[1]
+                        })
+                    });
+                    const data = await res.json();
+                    if (data.success == true) {
+                        alertify.success(data.message);
+                        // Change the DOM
+                        deleteItem.parentElement.parentElement.parentElement.remove();
+                        // Change the total price
+                        document.querySelector('.list-group-item:last-child strong').innerHTML =
+                            `Rp${new Intl.NumberFormat('id-ID').format(data.total)},00`;
+                        // Change the badge
+                        totalItems--;
+                        document.querySelector('.badge').innerHTML = totalItems;
+                    } else {
+                        alertify.error(data.message);
+                    }
+                })
+            });
         </script>
     @endsection

@@ -1,3 +1,4 @@
+@yield('php-variables')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="dark">
 
@@ -22,6 +23,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
     @yield('styles')
 </head>
 

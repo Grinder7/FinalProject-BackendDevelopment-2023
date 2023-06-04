@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Product;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -19,6 +20,11 @@ class ProductService
     public function getAllData(): Collection
     {
         return $this->productRepository->getAllProduct();
+    }
+
+    public function getById(int $id): Product
+    {
+        return $this->productRepository->getProductById($id);
     }
 
     public function getPaginatedProduct(int $page, string $column): LengthAwarePaginator
