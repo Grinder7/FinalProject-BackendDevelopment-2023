@@ -27,7 +27,6 @@ Route::post('catalogue', [ShoppingController::class, 'storeCart'])->name('cart.s
 
 Route::get('aboutus', [AppController::class, 'aboutus'])->name('app.aboutus');
 
-Route::get('checkout', [PaymentController::class, 'index'])->name('app.checkout')->middleware('auth');
 
 Route::get('logout', [LoginController::class, 'destroy'])->name('logout');
 
@@ -37,6 +36,11 @@ Route::middleware('guest')->group(function () {
 
     Route::get('register', [RegisterController::class, 'index'])->name('register.page');
     Route::post('register', [RegisterController::class, 'store'])->name('register');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('checkout', [PaymentController::class, 'index'])->name('app.checkout');
+    Route::post('checkout', [PaymentController::class, 'store'])->name('app.checkout');
 });
 
 Route::fallback(function () {
