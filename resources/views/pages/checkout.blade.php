@@ -95,15 +95,16 @@
                             <span class="badge bg-primary rounded-pill">{{ count($items) }}</span>
                         </h4>
                         <ul class="list-group mb-3">
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
-                                @foreach ($items as $item)
+                            @foreach ($items as $item)
+                                <li class="list-group-item d-flex justify-content-between lh-sm">
                                     <div>
                                         <h6 class="my-0">{{ $item['product_name'] }}</h6>
                                         <small class="text-body-secondary">Qty: {{ $item['quantity'] }}</small>
                                     </div>
-                                @endforeach
-                                <span class="text-body-secondary">Rp{{ number_format($item['total'], 2, ',', '.') }}</span>
-                            </li>
+                                    <span
+                                        class="text-body-secondary">Rp{{ number_format($item['total'], 2, ',', '.') }}</span>
+                                </li>
+                            @endforeach
 
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>Total (IDR)</span>
