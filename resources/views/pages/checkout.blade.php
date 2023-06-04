@@ -99,7 +99,7 @@
                                 <li class="list-group-item d-flex justify-content-between lh-sm">
                                     <div>
                                         <h6 class="my-0 pb-2">{{ $item['product_name'] }}</h6>
-                                        <div class="d-inline-flex col-lg-7">
+                                        <div class="d-inline-flex col-lg-7 align-items-center">
                                             <label for="product_{{ $item['product_id'] }}" class="form-label pe-2">
                                                 Qty:
                                             </label>
