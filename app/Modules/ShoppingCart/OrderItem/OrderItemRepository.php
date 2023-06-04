@@ -13,12 +13,16 @@ class OrderItemRepository
     {
         return OrderItem::all();
     }
-    public function storeData(array $data): OrderItem
+    public function create(array $data): OrderItem
     {
         return OrderItem::create($data);
     }
     public function updateData(OrderItem $orderItem, array $data): bool
     {
         return $orderItem->update($data);
+    }
+    public function getById(string $id): OrderItem | null
+    {
+        return OrderItem::find($id);
     }
 }

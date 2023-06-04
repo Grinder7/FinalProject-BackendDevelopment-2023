@@ -17,4 +17,8 @@ class OrderDetailRepository
     {
         return OrderDetail::create($data);
     }
+    public function getByUserId(string $id): OrderDetail | null
+    {
+        return OrderDetail::where('user_id', $id)->first();
+    }
 }

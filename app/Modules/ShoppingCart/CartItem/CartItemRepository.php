@@ -33,4 +33,8 @@ class CartItemRepository
             return CartItem::create($data);
         }
     }
+    public function deleteBySessionId(string $sId): int
+    {
+        return CartItem::where('session_id', $sId)->delete();
+    }
 }

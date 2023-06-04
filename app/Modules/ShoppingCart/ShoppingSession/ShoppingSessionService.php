@@ -33,4 +33,8 @@ class ShoppingSessionService
     {
         return $this->shoppingSessionRepository->updateTotal($uid, $total);
     }
+    public function deleteById(string $id): bool
+    {
+        return $this->shoppingSessionRepository->deleteById($id);
+    }
 }

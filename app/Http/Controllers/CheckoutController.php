@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\QuantityUpdateRequest;
 use App\Modules\Payment\PaymentService;
-use App\Modules\PaymentDetail\PaymentDetailService;
 use App\Modules\Product\ProductService;
 use App\Modules\ShoppingCart\CartItem\CartItemService;
-use App\Modules\ShoppingCart\OrderDetail\OrderDetailService;
-use App\Modules\ShoppingCart\OrderItem\OrderItemService;
 use App\Modules\ShoppingCart\ShoppingSession\ShoppingSessionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

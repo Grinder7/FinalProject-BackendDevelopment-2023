@@ -43,11 +43,18 @@
                                     <small
                                         class="text-body-secondary">Rp{{ number_format($product->price, 2, ',', '.') }}</small>
                                     <div>
-                                        <small class="text-body-secondary me-2">Stok: {{ $product->stock }}</small>
+                                        <small class="text-body-secondary me-2 stock_product">Stok:
+                                            {{ $product->stock }}</small>
                                         <input type="hidden" name="quantity" value=1>
                                         <button type="submit" class="btn btn-sm btn-outline-secondary productAdd"
-                                            value="{{ $product->id }}" name="product_id"><i
-                                                class="fa-solid fa-plus"></i></button>
+                                            value="{{ $product->id }}" name="product_id"
+                                            @if ($product->stock == 0) disabled @endif>
+                                            @if ($product->stock == 0)
+                                                <i class="fa-solid fa-times"></i>
+                                            @else
+                                                <i class="fa-solid fa-plus"></i>
+                                            @endif
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -91,6 +98,14 @@
             productAdd.addEventListener('click', async function() {
                 productAdd.innerHTML = '<i class="fa-solid fa-arrow-rotate-right fa-spin"></i>';
                 productAdd.disabled = true;
+                const stock = this.parentElement.querySelector('.stock_product').innerText.split(' ')[
+                    1];
+                if (stock < 1) {
+                    alertify.error('Stok produk habis');
+                    productAdd.innerHTML = '<i class="fa-solid fa-times"></i>';
+                    productAdd.disabled = true;
+                    return;
+                }
                 const response = await fetchData(this.value);
                 productAdd.innerHTML = '<i class="fa-solid fa-plus"></i>';
                 productAdd.disabled = false;

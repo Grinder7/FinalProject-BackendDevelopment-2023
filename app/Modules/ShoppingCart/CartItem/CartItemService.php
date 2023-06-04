@@ -38,6 +38,7 @@ class CartItemService
     {
         return $this->cartItemRepository->getBySessionId($sId);
     }
+
     public function addProduct(array $data): JsonResponse
     {
         $shoppingSession = $this->shoppingSessionRepository->getByUserId(Auth::id());
@@ -76,5 +77,9 @@ class CartItemService
                 'data' => $addedProduct
             ], 200);
         }
+    }
+    public function deleteBySessionId(string $sId): int
+    {
+        return $this->cartItemRepository->deleteBySessionId($sId);
     }
 }
