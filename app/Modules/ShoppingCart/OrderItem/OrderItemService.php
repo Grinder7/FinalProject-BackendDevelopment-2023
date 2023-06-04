@@ -17,4 +17,8 @@ class OrderItemService
     {
         return $this->orderItemRepository->getAllData();
     }
+    public function storeData(array $data)
+    {
+        return $this->orderItemRepository->storeData($data);
+    }
 }

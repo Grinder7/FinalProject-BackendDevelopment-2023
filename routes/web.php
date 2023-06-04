@@ -1,12 +1,11 @@
 <?php
 
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ShoppingController;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +26,6 @@ Route::post('catalogue', [ShoppingController::class, 'storeCart'])->name('cart.s
 
 Route::get('aboutus', [AppController::class, 'aboutus'])->name('app.aboutus');
 
-
 Route::get('logout', [LoginController::class, 'destroy'])->name('logout');
 
 Route::middleware('guest')->group(function () {
@@ -39,8 +37,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('checkout', [PaymentController::class, 'index'])->name('app.checkout');
-    Route::post('checkout', [PaymentController::class, 'store'])->name('app.checkout');
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('app.checkout');
+    Route::post('checkout', [CheckoutController::class, 'store'])->name('app.checkout');
 });
 
 Route::fallback(function () {

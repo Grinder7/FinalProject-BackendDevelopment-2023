@@ -92,34 +92,22 @@
                     <div class="col-md-5 col-lg-4 order-md-last">
                         <h4 class="d-flex justify-content-between align-items-center mb-3">
                             <span class="text-primary">Keranjang Anda</span>
-                            {{-- PAKE PHP COUNT() --}}
-                            <span class="badge bg-primary rounded-pill">{{ count(['aa', 'bb']) }}</span>
+                            <span class="badge bg-primary rounded-pill">{{ count($items) }}</span>
                         </h4>
                         <ul class="list-group mb-3">
                             <li class="list-group-item d-flex justify-content-between lh-sm">
-                                <div>
-                                    <h6 class="my-0">Product name</h6>
-                                    <small class="text-body-secondary">Brief description</small>
-                                </div>
-                                <span class="text-body-secondary">$12</span>
+                                @foreach ($items as $item)
+                                    <div>
+                                        <h6 class="my-0">{{ $item['product_name'] }}</h6>
+                                        <small class="text-body-secondary">Qty: {{ $item['quantity'] }}</small>
+                                    </div>
+                                @endforeach
+                                <span class="text-body-secondary">Rp{{ number_format($item['total'], 2, ',', '.') }}</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
-                                <div>
-                                    <h6 class="my-0">Second product</h6>
-                                    <small class="text-body-secondary">Brief description</small>
-                                </div>
-                                <span class="text-body-secondary">$8</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
-                                <div>
-                                    <h6 class="my-0">Third item</h6>
-                                    <small class="text-body-secondary">Brief description</small>
-                                </div>
-                                <span class="text-body-secondary">$5</span>
-                            </li>
+
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>Total (IDR)</span>
-                                <strong>$20</strong>
+                                <strong>Rp{{ number_format($shoppingSession->total, 2, ',', '.') }}</strong>
                             </li>
                         </ul>
                     </div>

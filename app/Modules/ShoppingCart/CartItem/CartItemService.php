@@ -34,6 +34,10 @@ class CartItemService
     {
         return $this->cartItemRepository->getBySessionAndProductId($sId, $pId);
     }
+    public function getBySessionId(string $sId): Collection | null
+    {
+        return $this->cartItemRepository->getBySessionId($sId);
+    }
     public function addProduct(array $data): JsonResponse
     {
         $shoppingSession = $this->shoppingSessionRepository->getByUserId(Auth::id());

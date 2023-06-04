@@ -17,6 +17,10 @@ class CartItemRepository
     {
         return CartItem::where('session_id', $sId)->where('product_id', $pId)->get()->first();
     }
+    public function getBySessionId(string $sId): Collection | null
+    {
+        return CartItem::where('session_id', $sId)->get();
+    }
     public function insertProduct(array $data): CartItem
     {
         // Check if product already exist in cart

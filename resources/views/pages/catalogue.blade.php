@@ -40,8 +40,8 @@
                                 <p class="card-text fw-bolder">{{ $product->name }}</p>
                                 <p class="card-text text-body-secondary mb-4">{{ $product->description }}</p>
                                 <div class="d-flex justify-content-between align-items-center mt-auto">
-                                    <small class="text-body-secondary">Rp
-                                        {{ number_format($product->price, 2, ',', '.') }}</small>
+                                    <small
+                                        class="text-body-secondary">Rp{{ number_format($product->price, 2, ',', '.') }}</small>
                                     <div>
                                         <small class="text-body-secondary me-2">Stok: {{ $product->stock }}</small>
                                         <input type="hidden" name="quantity" value=1>
