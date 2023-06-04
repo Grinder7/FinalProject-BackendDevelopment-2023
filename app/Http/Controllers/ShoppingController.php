@@ -20,27 +20,14 @@ class ShoppingController extends Controller
     public function storeCart(CartItemRequest $request)
     {
         if (Auth::check()) {
-
             $validated =  $request->validated();
-            $success1 = $this->cartItemService->addProduct($validated);
-            if ($success1) {
-                $json = Response::json([
-                    'success' => true,
-                    'message' => 'Successfully add to cart',
-                    'data' => $validated
-                ], 200);
-            } else {
-                $json = Response::json([
-                    'success' => false,
-                    'message' => 'Failed to add to cart',
-                    'data' => $validated
-                ], 400);
-            }
-            return $json;
+            $response = $this->cartItemService->addProduct($validated);
+            return $response;
+        } else {
+            return Response::json([
+                'success' => false,
+                'message' => 'Please login first'
+            ], 400);
         }
-        return Response::json([
-            'success' => false,
-            'message' => 'Please login first'
-        ], 400);
     }
 }

@@ -96,5 +96,11 @@ class DatabaseSeeder extends Seeder
             'zip' => '65154',
             'remember_detail' => true,
         ]);
+        $test_user = User::create([
+            'username' => 'User',
+            'email' => 'user@gmail.com',
+            'password' => bcrypt('password'),
+            'is_admin' => false,
+        ]);
     }
 }
