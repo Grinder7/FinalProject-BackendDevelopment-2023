@@ -112,14 +112,14 @@
                                             <i class="fa-solid fa-trash-can ms-3 delete-item" style="cursor: pointer;"></i>
                                         </div>
                                     </div>
-                                    <span
-                                        class="text-body-secondary">Rp{{ number_format($item['total'], 2, ',', '.') }}</span>
+                                    <span class="text-body-secondary"
+                                        id="sub_total_{{ $item['product_id'] }}">Rp{{ number_format($item['total'], 2, ',', '.') }}</span>
                                 </li>
                             @endforeach
 
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>Total (IDR)</span>
-                                <strong>Rp{{ number_format($shoppingSession->total, 2, ',', '.') }}</strong>
+                                <strong id="totalPrice">Rp{{ number_format($shoppingSession->total, 2, ',', '.') }}</strong>
                             </li>
                         </ul>
                     </div>
@@ -131,7 +131,7 @@
                                 <div class="col-sm-6">
                                     <label for="firstName" class="form-label">Nama Depan</label>
                                     <input type="text" class="form-control" id="firstName" name="firstName"
-                                        placeholder="" value="{{ $payment[0]->firstname }}" required>
+                                        placeholder="" value="{{ $payments[0]->firstname }}" required>
                                     <div class="invalid-feedback">
                                         Nama depan harus valid.
                                     </div>
@@ -297,7 +297,13 @@
                     });
                     const data = await res.json();
                     if (data.success == true) {
+                        // Change DOM
                         alertify.success(data.message);
+                        const subTotal = document.querySelector(`#sub_total_${data.product_id}`);
+                        subTotal.innerHTML =
+                            `Rp${new Intl.NumberFormat('id-ID').format(data.subtotal)},00`;
+                        document.querySelector('#totalPrice').innerHTML =
+                            `Rp${new Intl.NumberFormat('id-ID').format(data.total)},00`;
                     } else {
                         // Change DOM
                         quantityForm.value = data.quantity;
@@ -328,7 +334,7 @@
                         // Change the DOM
                         deleteItem.parentElement.parentElement.parentElement.remove();
                         // Change the total price
-                        document.querySelector('.list-group-item:last-child strong').innerHTML =
+                        document.querySelector('#totalPrice').innerHTML =
                             `Rp${new Intl.NumberFormat('id-ID').format(data.total)},00`;
                         // Change the badge
                         totalItems--;

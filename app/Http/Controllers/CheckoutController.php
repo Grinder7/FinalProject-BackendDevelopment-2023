@@ -77,16 +77,54 @@ class CheckoutController extends Controller
                 'success' => false,
                 'message' => 'Quantity exceeds stock (Max: ' . $product->stock . ')',
                 'stock' => $product->stock,
-                'quantity' => $cartItem->quantity
+                'quantity' => $cartItem->quantity,
+                'subtotal' => $cartItem->quantity * $product->price,
+                'product_id' => $validated['product_id'],
+                'total' => $shoppingSession->total
             ], 400);
         } else {
+            if ($validated['quantity'] < 1) {
+                return Response::json([
+                    'success' => false,
+                    'message' => 'Quantity cannot =< 0',
+                    'stock' => $product->stock,
+                    'quantity' => $cartItem->quantity,
+                    'subtotal' => $cartItem->quantity * $product->price,
+                    'product_id' => $validated['product_id'],
+                    'total' => $shoppingSession->total
+                ], 400);
+            } elseif ($validated['quantity'] == $cartItem->quantity) {
+                return Response::json([
+                    'success' => false,
+                    'message' => 'Quantity is same as before',
+                    'stock' => $product->stock,
+                    'quantity' => $cartItem->quantity,
+                    'subtotal' => $cartItem->quantity * $product->price,
+                    'product_id' => $validated['product_id'],
+                    'total' => $shoppingSession->total
+                ], 400);
+            }
+            // Update total price in shopping session
+            elseif ($cartItem->quantity > $validated['quantity']) {
+                // qty decreased
+                $shoppingSession->total = $shoppingSession->total + ($validated['quantity'] * $product->price);
+                $shoppingSession->total = $shoppingSession->total - ($cartItem->quantity * $product->price);
+            } else if ($cartItem->quantity < $validated['quantity']) {
+                // qty increased
+                $shoppingSession->total = $shoppingSession->total - ($cartItem->quantity * $product->price);
+                $shoppingSession->total = $shoppingSession->total + ($validated['quantity'] * $product->price);
+            }
+            $shoppingSession->save();
             $cartItem->quantity = $validated['quantity'];
             $cartItem->save();
             return Response::json([
                 'success' => true,
                 'message' => 'Quantity updated',
                 'stock' => $product->stock,
-                'quantity' => $cartItem->quantity
+                'quantity' => $cartItem->quantity,
+                'subtotal' => $cartItem->quantity * $product->price,
+                'product_id' => $validated['product_id'],
+                'total' => $shoppingSession->total
             ], 200);
         }
     }
