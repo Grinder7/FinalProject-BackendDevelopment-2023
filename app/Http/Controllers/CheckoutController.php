@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CheckoutRequest;
 use App\Http\Requests\QuantityUpdateRequest;
 use App\Modules\Payment\PaymentService;
 use App\Modules\PaymentDetail\PaymentDetailService;
 use App\Modules\Product\ProductService;
 use App\Modules\ShoppingCart\CartItem\CartItemService;
+use App\Modules\ShoppingCart\OrderDetail\OrderDetailService;
+use App\Modules\ShoppingCart\OrderItem\OrderItemService;
 use App\Modules\ShoppingCart\ShoppingSession\ShoppingSessionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,14 +20,14 @@ class CheckoutController extends Controller
     public ShoppingSessionService $shoppingSessionService;
     public CartItemService $cartItemService;
     public ProductService $productService;
-    public PaymentDetailService $paymentDetailService;
-    public function __construct(PaymentService $paymentService, ShoppingSessionService $shoppingSessionService, CartItemService $cartItemService, ProductService $productService, PaymentDetailService $paymentDetailService)
+
+
+    public function __construct(PaymentService $paymentService, ShoppingSessionService $shoppingSessionService, CartItemService $cartItemService, ProductService $productService)
     {
         $this->paymentService = $paymentService;
         $this->shoppingSessionService = $shoppingSessionService;
         $this->cartItemService = $cartItemService;
         $this->productService = $productService;
-        $this->paymentDetailService = $paymentDetailService;
     }
     public function index()
     {
@@ -159,17 +160,5 @@ class CheckoutController extends Controller
                 'total' => $shoppingSession->total
             ], 500);
         }
-    }
-
-    public function confirm(CheckoutRequest $request)
-    {
-        $shoppingSession = $this->shoppingSessionService->getByUserId(Auth::id());
-        if ($shoppingSession->total == 0) {
-            return redirect()->route('checkout.page')->with('error', 'Your cart is empty');
-        } else {
-            $validated = $request->validated();
-            $validated['user_id'] = Auth::id();
-        }
-        return 'a';
     }
 }

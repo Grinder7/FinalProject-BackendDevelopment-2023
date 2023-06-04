@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ShoppingController;
@@ -41,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::post('checkout', [CheckoutController::class, 'store'])->name('app.checkout');
     Route::post('checkout/qtyupdate', [CheckoutController::class, 'qtyUpdate'])->name('app.checkout.qtyupdate');
     Route::post('checkout/deleteitem', [CheckoutController::class, 'deleteItem'])->name('app.checkout.deleteitem');
-    Route::post('checkout/confirm', [CheckoutController::class, 'confirm'])->name('app.checkout.confirm');
+    Route::post('checkout/confirm', [PaymentController::class, 'confirm'])->name('app.checkout.confirm');
 });
 
 // Route::fallback(function () {

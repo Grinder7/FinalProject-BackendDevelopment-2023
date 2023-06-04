@@ -17,4 +17,8 @@ class OrderDetailService
     {
         return $this->orderDetailRepository->getAllData();
     }
+    public function create(array $data): OrderDetail
+    {
+        return $this->orderDetailRepository->create($data);
+    }
 }

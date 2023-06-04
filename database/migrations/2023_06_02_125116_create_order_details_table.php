@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignUlid('payment_id');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->foreign('payment_id')->references('id')->on('payments')->cascadeOnDelete();
+            $table->foreign('payment_id')->references('id')->on('payment_details')->cascadeOnDelete();
         });
     }
 

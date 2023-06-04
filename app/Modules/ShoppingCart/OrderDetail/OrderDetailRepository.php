@@ -13,4 +13,8 @@ class OrderDetailRepository
     {
         return OrderDetail::all();
     }
+    public function create(array $data): OrderDetail
+    {
+        return OrderDetail::create($data);
+    }
 }
