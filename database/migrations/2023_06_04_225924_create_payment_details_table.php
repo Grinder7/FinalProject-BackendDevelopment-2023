@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('address2')->nullable();
             $table->string('zip');
-            $table->integer('payment_method');
+            $table->string('payment_method');
             $table->string('card_name');
             $table->string('card_number');
             $table->string('card_expiration');
