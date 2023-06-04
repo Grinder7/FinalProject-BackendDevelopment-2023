@@ -125,12 +125,13 @@
                     </div>
                     <div class="col-md-7 col-lg-8">
                         <h4 class="mb-3">Alamat Pembayaran</h4>
-                        <form class="needs-validation" novalidate>
+                        <form class="needs-validation" method="POST" action="{{ route('app.checkout.confirm') }}"
+                            novalidate>
                             @csrf
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <label for="firstName" class="form-label">Nama Depan</label>
-                                    <input type="text" class="form-control" id="firstName" name="firstName"
+                                    <input type="text" class="form-control" id="firstName" name="firstname"
                                         placeholder="" value="{{ $payments[0]->firstname }}" required>
                                     <div class="invalid-feedback">
                                         Nama depan harus valid.
@@ -140,7 +141,7 @@
                                 <div class="col-sm-6">
                                     <label for="lastName" class="form-label">Nama Belakang</label>
                                     <input type="text" class="form-control" id="lastName" placeholder=""
-                                        value="{{ $payments[0]->lastname }}" required>
+                                        value="{{ $payments[0]->lastname }}" name="lastname" required>
                                     <div class="invalid-feedback">
                                         Nama belakang harus valid.
                                     </div>
@@ -150,7 +151,7 @@
                                     <label for="email" class="form-label">Email <span
                                             class="text-body-secondary">(Opsional)</span></label>
                                     <input type="email" class="form-control" id="email" placeholder="you@example.com"
-                                        value="{{ $payments[0]->email }}">
+                                        value="{{ $payments[0]->email }}" name="email">
                                     <div class="invalid-feedback">
                                         Mohon masukkan email yang valid untuk pembaruan pengiriman.
                                     </div>
@@ -159,7 +160,7 @@
                                 <div class="col-12">
                                     <label for="address" class="form-label">Alamat</label>
                                     <input type="text" class="form-control" id="address" placeholder="1234 Main St"
-                                        value="{{ $payments[0]->address }}" required>
+                                        value="{{ $payments[0]->address }}" name="address" required>
                                     <div class="invalid-feedback">
                                         Mohon masukkan alamat pengiriman anda.
                                     </div>
@@ -169,12 +170,13 @@
                                     <label for="address2" class="form-label">Alamat 2 <span
                                             class="text-body-secondary">(Opsional)</span></label>
                                     <input type="text" class="form-control" id="address2"
-                                        placeholder="Apartment or suite" value="{{ $payments[0]->address2 }}">
+                                        placeholder="Apartment or suite" value="{{ $payments[0]->address2 }}"
+                                        name="address2">
                                 </div>
 
                                 <div class="col-md-3">
                                     <label for="zip" class="form-label">Kode Pos</label>
-                                    <input type="text" class="form-control" id="zip" placeholder=""
+                                    <input type="text" class="form-control" id="zip" placeholder="" name="zip"
                                         value="{{ $payments[0]->zip }}"required>
                                     <div class="invalid-feedback">
                                         Kode pos diperlukan.
@@ -185,8 +187,8 @@
                             <hr class="my-4">
 
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="save-info"
-                                    @if ($payments[0]->remember_detail) checked @endif>
+                                <input type="checkbox" class="form-check-input" id="save-info" name="remember_detail"
+                                    value="1" @if ($payments[0]->remember_detail) checked @endif>
                                 <label class="form-check-label" for="save-info">Simpan informasi ini untuk
                                     kedepannya</label>
                             </div>
@@ -197,13 +199,13 @@
 
                             <div class="my-3">
                                 <div class="form-check">
-                                    <input id="credit" name="paymentMethod" type="radio" class="form-check-input"
-                                        checked required>
+                                    <input id="credit" name="payment_method" type="radio" class="form-check-input"
+                                        value="1" checked required>
                                     <label class="form-check-label" for="credit">Kartu Kredit</label>
                                 </div>
                                 <div class="form-check">
-                                    <input id="debit" name="paymentMethod" type="radio" class="form-check-input"
-                                        required>
+                                    <input id="debit" name="payment_method" type="radio" class="form-check-input"
+                                        value="2" required>
                                     <label class="form-check-label" for="debit">Kartu Debit</label>
                                 </div>
                             </div>
@@ -211,7 +213,8 @@
                             <div class="row gy-3">
                                 <div class="col-md-6">
                                     <label for="cc-name" class="form-label">Nama pada kartu</label>
-                                    <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                                    <input type="text" class="form-control" id="cc-name" placeholder=""
+                                        name="card_name"required>
                                     <small class="text-body-secondary">Nama Lengkap sesuai kartu</small>
                                     <div class="invalid-feedback">
                                         Nama pada kartu diperlukan
@@ -220,16 +223,18 @@
 
                                 <div class="col-md-6">
                                     <label for="cc-number" class="form-label">Nomor Kartu</label>
-                                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                    <input type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}"
+                                        class="form-control" id="cc-number" placeholder="xxxx xxxx xxxx xxxx"
+                                        name="card_number" required>
                                     <div class="invalid-feedback">
-                                        Nomor kartu diperlukan
+                                        Nomor kartu invalid
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <label for="cc-expiration" class="form-label">Masa Berlaku</label>
-                                    <input type="text" class="form-control" id="cc-expiration" placeholder=""
-                                        required>
+                                    <input type="text" class="form-control" id="cc-expiration" placeholder="mm/yy"
+                                        name="card_expiration" required>
                                     <div class="invalid-feedback">
                                         Tanggal kadaluarsa diperlukan
                                     </div>
@@ -237,7 +242,8 @@
 
                                 <div class="col-md-3">
                                     <label for="cc-cvv" class="form-label">CVV</label>
-                                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                    <input type="text" class="form-control" id="cc-cvv" placeholder="xxx"
+                                        name="card_cvv" required>
                                     <div class="invalid-feedback">
                                         CVV diperlukan
                                     </div>
@@ -245,7 +251,6 @@
                             </div>
 
                             <hr class="my-4">
-
                             <button class="w-100 btn btn-primary btn-lg" type="submit">Lanjutkan Pembayaran</button>
                         </form>
                     </div>
@@ -344,5 +349,61 @@
                     }
                 })
             });
+
+            function patternMatch({
+                input,
+                template
+            }) {
+                try {
+                    let j = 0;
+                    let plaintext = "";
+                    let countj = 0;
+                    while (j < template.length) {
+                        if (countj > input.length - 1) {
+                            template = template.substring(0, j);
+                            break;
+                        }
+
+                        if (template[j] == input[j]) {
+                            j++;
+                            countj++;
+                            continue;
+                        }
+
+                        if (template[j] == "x") {
+                            template =
+                                template.substring(0, j) + input[countj] + template.substring(j + 1);
+                            plaintext = plaintext + input[countj];
+                            countj++;
+                        }
+                        j++;
+                    }
+
+                    return template;
+                } catch {
+                    return "";
+                }
+            }
+            const cardNumber = document.querySelector('#cc-number');
+            cardNumber.oninput = (e) => {
+                e.target.value = patternMatch({
+                    input: e.target.value,
+                    template: "xxxx xxxx xxxx xxxx",
+                });
+            };
+            const cardExpiration = document.querySelector('#cc-expiration');
+            cardExpiration.oninput = (e) => {
+                e.target.value = patternMatch({
+                    input: e.target.value,
+                    template: "xx/xx",
+                });
+            };
+            const cardCvv = document.querySelector('#cc-cvv');
+            cardCvv.oninput = (e) => {
+                e.target.value = patternMatch({
+                    input: e.target.value,
+                    template: "xxx",
+                });
+            };
         </script>
     @endsection

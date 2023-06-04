@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CheckoutRequest;
 use App\Http\Requests\QuantityUpdateRequest;
 use App\Modules\Payment\PaymentService;
 use App\Modules\Product\ProductService;
@@ -27,7 +28,7 @@ class CheckoutController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            $payments = $this->paymentService->getPaymentById(Auth::id());
+            $payments = $this->paymentService->getByUserId(Auth::id());
             // Get Shoppping Session
             $shoppingSession = $this->shoppingSessionService->getByUserId(Auth::id());
             // Get Cart Item
@@ -155,5 +156,17 @@ class CheckoutController extends Controller
                 'total' => $shoppingSession->total
             ], 500);
         }
+    }
+
+    public function confirm(CheckoutRequest $request)
+    {
+        $shoppingSession = $this->shoppingSessionService->getByUserId(Auth::id());
+        if ($shoppingSession->total == 0) {
+            return redirect()->route('checkout.page')->with('error', 'Your cart is empty');
+        } else {
+            $validated = $request->validated();
+            $payment = $this->paymentService->getByUserId(Auth::id());
+        }
+        return 'a';
     }
 }

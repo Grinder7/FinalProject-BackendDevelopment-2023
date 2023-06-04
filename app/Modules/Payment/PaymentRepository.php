@@ -13,7 +13,7 @@ class PaymentRepository
     {
         Payment::create($data);
     }
-    public function getPaymentById(string $id)
+    public function getByUserId(string $id)
     {
         return DB::table('payments')
             ->where('user_id', $id)

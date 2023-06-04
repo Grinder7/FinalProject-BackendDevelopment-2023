@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::post('checkout', [CheckoutController::class, 'store'])->name('app.checkout');
     Route::post('checkout/qtyupdate', [CheckoutController::class, 'qtyUpdate'])->name('app.checkout.qtyupdate');
     Route::post('checkout/deleteitem', [CheckoutController::class, 'deleteItem'])->name('app.checkout.deleteitem');
+    Route::post('checkout/confirm', [CheckoutController::class, 'confirm'])->name('app.checkout.confirm');
 });
 
 // Route::fallback(function () {

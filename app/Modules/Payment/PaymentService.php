@@ -20,8 +20,8 @@ class PaymentService
         $this->paymentRepository->createPayment($data);
     }
 
-    public function getPaymentById(string $id)
+    public function getByUserId(string $id)
     {
-        return $this->paymentRepository->getPaymentById($id);
+        return $this->paymentRepository->getByUserId($id);
     }
 }
