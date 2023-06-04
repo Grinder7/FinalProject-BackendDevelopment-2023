@@ -200,12 +200,12 @@
                             <div class="my-3">
                                 <div class="form-check">
                                     <input id="credit" name="payment_method" type="radio" class="form-check-input"
-                                        value="1" checked required>
+                                        value="kredit" checked required>
                                     <label class="form-check-label" for="credit">Kartu Kredit</label>
                                 </div>
                                 <div class="form-check">
                                     <input id="debit" name="payment_method" type="radio" class="form-check-input"
-                                        value="2" required>
+                                        value="debit" required>
                                     <label class="form-check-label" for="debit">Kartu Debit</label>
                                 </div>
                             </div>

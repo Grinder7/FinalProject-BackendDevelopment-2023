@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CheckoutRequest;
 use App\Http\Requests\QuantityUpdateRequest;
 use App\Modules\Payment\PaymentService;
+use App\Modules\PaymentDetail\PaymentDetailService;
 use App\Modules\Product\ProductService;
 use App\Modules\ShoppingCart\CartItem\CartItemService;
 use App\Modules\ShoppingCart\ShoppingSession\ShoppingSessionService;
@@ -18,12 +19,14 @@ class CheckoutController extends Controller
     public ShoppingSessionService $shoppingSessionService;
     public CartItemService $cartItemService;
     public ProductService $productService;
-    public function __construct(PaymentService $paymentService, ShoppingSessionService $shoppingSessionService, CartItemService $cartItemService, ProductService $productService)
+    public PaymentDetailService $paymentDetailService;
+    public function __construct(PaymentService $paymentService, ShoppingSessionService $shoppingSessionService, CartItemService $cartItemService, ProductService $productService, PaymentDetailService $paymentDetailService)
     {
         $this->paymentService = $paymentService;
         $this->shoppingSessionService = $shoppingSessionService;
         $this->cartItemService = $cartItemService;
         $this->productService = $productService;
+        $this->paymentDetailService = $paymentDetailService;
     }
     public function index()
     {
@@ -165,7 +168,7 @@ class CheckoutController extends Controller
             return redirect()->route('checkout.page')->with('error', 'Your cart is empty');
         } else {
             $validated = $request->validated();
-            $payment = $this->paymentService->getByUserId(Auth::id());
+            $validated['user_id'] = Auth::id();
         }
         return 'a';
     }

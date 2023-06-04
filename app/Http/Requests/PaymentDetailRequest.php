@@ -29,7 +29,7 @@ class PaymentDetailRequest extends FormRequest
             'email' => 'nullable|email|max:255',
             'address' => 'required|string|max:255',
             'address2' => 'nullable|string|max:255',
-            'payment_method' => 'required|integer',
+            'payment_method' => 'required|string|max:255',
             'card_name' => 'required|string|max:255',
             'card_number' => 'required|string|max:30',
             'card_expiration' => 'required|string|max:6',
