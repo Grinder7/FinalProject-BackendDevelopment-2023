@@ -206,11 +206,6 @@
                                         required>
                                     <label class="form-check-label" for="debit">Kartu Debit</label>
                                 </div>
-                                <div class="form-check">
-                                    <input id="paypal" name="paymentMethod" type="radio" class="form-check-input"
-                                        required>
-                                    <label class="form-check-label" for="paypal">PayPal</label>
-                                </div>
                             </div>
 
                             <div class="row gy-3">
