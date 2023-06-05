@@ -6,6 +6,7 @@
 
     <title>Invoice - IndoJuni</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/app/xyXVxK19116nI6TPT5KF.png') }}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
@@ -127,7 +128,7 @@
                                                 Tax
                                             </th>
                                             <td class="border-0 text-end">
-                                                {{ number_format(floor($orderDetail->total * 0.11), 2, ',', '.') }}
+                                                Rp{{ number_format(floor($orderDetail->total * 0.11), 2, ',', '.') }}
                                             </td>
                                         </tr>
 
@@ -137,7 +138,7 @@
                                             </th>
                                             <td class="border-0 text-end">
                                                 <h4 class="m-0 fw-semibold">
-                                                    {{ number_format($orderDetail->total + floor($orderDetail->total * 0.11), 2, ',', '.') }}
+                                                    Rp{{ number_format($orderDetail->total + floor($orderDetail->total * 0.11), 2, ',', '.') }}
                                                 </h4>
                                             </td>
                                         </tr>
