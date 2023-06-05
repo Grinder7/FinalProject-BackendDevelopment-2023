@@ -29,14 +29,14 @@ class DatabaseSeeder extends Seeder
             'stock' => 10,
             'price' => 3100,
             'description' => 'Indomie Goreng adalah mie instan rasa goreng yang terbuat dari bahan-bahan berkualitas. Indomie Goreng memiliki rasa yang khas pedas dan gurih. Indomie Goreng dapat dinikmati oleh semua kalangan usia.',
-            'img' => '0lxKQl2mvqEh70XLvgIA.png',
+            'img' => '0lxKQl2mvqEh70XLvgIA.jpg',
         ]);
         Product::create([
             'name' => 'Indomie Goreng Jumbo',
             'stock' => 15,
             'price' => 4300,
             'description' => 'Indomie Goreng Jumbo adalah varian mie instan yang lebih besar dari ukuran standar, memberikan pengalaman makan yang lebih puas dan kenikmatan yang berlipat ganda. ',
-            'img' => 'Iyo3eLTieosZSvRJTGQl.png',
+            'img' => 'Iyo3eLTieosZSvRJTGQl.jpg',
         ]);
         Product::create([
             'name' => 'Indomie Goreng Jumbo Rasa Ayam Panggang',
