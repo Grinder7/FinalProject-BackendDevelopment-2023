@@ -118,7 +118,12 @@
                             @endforeach
 
                             <li class="list-group-item d-flex justify-content-between">
-                                <span>Pajak: </span>
+                                <span>SubTotal: </span>
+                                <strong
+                                    id="totalbt">Rp{{ number_format(floor($shoppingSession->total), 2, ',', '.') }}</strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Pajak (11%): </span>
                                 <strong
                                     id="tax">Rp{{ number_format(floor($shoppingSession->total * 0.11), 2, ',', '.') }}</strong>
                             </li>
@@ -292,6 +297,8 @@
             // DOM
             const taxDOM = document.querySelector('#tax');
             const totalPriceDOM = document.querySelector('#totalPrice');
+            // total before tax
+            const totalbtDOM = document.querySelector('#totalbt');
 
             // Check if the quantity is changed
             const quantityForms = document.querySelectorAll('.quantity-form');
@@ -318,6 +325,8 @@
                         const subTotal = document.querySelector(`#sub_total_${data.product_id}`);
                         subTotal.innerHTML =
                             `Rp${new Intl.NumberFormat('id-ID').format(data.subtotal)},00`;
+                        totalbtDOM.innerHTML =
+                            `Rp${new Intl.NumberFormat('id-ID').format(data.total)},00`;
                         totalPriceDOM.innerHTML =
                             `Rp${new Intl.NumberFormat('id-ID').format(data.total+tax)},00`;
                         taxDOM.innerHTML =
@@ -353,6 +362,8 @@
                         deleteItem.parentElement.parentElement.parentElement.remove();
                         // Change the total price
                         const tax = data.total * 0.11;
+                        totalbtDOM.innerHTML =
+                            `Rp${new Intl.NumberFormat('id-ID').format(data.total)},00`;
                         totalPriceDOM.innerHTML =
                             `Rp${new Intl.NumberFormat('id-ID').format(data.total+tax)},00`;
                         // Change the badge
