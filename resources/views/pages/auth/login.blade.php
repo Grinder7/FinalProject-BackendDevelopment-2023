@@ -80,7 +80,7 @@
 @endsection
 
 @section('content')
-    <main class="form-signin w-100 m-auto">
+    <main class="d-grid form-signin w-100 h-100 m-auto align-items-center">
         <form action="{{ route('login') }}" method="POST">
             @csrf
             <img class="mb-4" src="{{ asset('images/app/xyXVxK19116nI6TPT5KF.png') }}" alt="" height="57">

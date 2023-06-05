@@ -18,6 +18,14 @@
 
     <link rel="stylesheet" href="{{ asset('css/app/auth.css') }}">
     @yield('styles')
+    <style>
+        .swal2-shown {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            scrollbarPadding: false,
+        }
+    </style>
 </head>
 
 <body class="text-center bg-body-tertiary">
