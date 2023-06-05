@@ -46,9 +46,9 @@
                                         <small class="text-body-secondary me-2 stock_product">Stok:
                                             {{ $product->stock }}</small>
                                         <input type="hidden" name="quantity" value=1>
-                                        <button type="submit" class="btn btn-sm btn-outline-secondary productAdd"
-                                            value="{{ $product->id }}" name="product_id"
-                                            @if ($product->stock == 0) disabled @endif>
+                                        <button type="submit" title="Add to cart"
+                                            class="btn btn-sm btn-outline-secondary productAdd" value="{{ $product->id }}"
+                                            name="product_id" @if ($product->stock == 0) disabled @endif>
                                             @if ($product->stock == 0)
                                                 <i class="fa-solid fa-times"></i>
                                             @else
