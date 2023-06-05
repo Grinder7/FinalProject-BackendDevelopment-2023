@@ -145,6 +145,12 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="d-flex float-end">
+                                <a class="btn btn-success me-1 pt-2" href="{{ URL::previous() }}">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                    <span>Back</span>
+                                </a>
+                            </div>
                             {{-- <div class="d-print-none mt-4">
                                 <div class="float-end">
                                     <a href="javascript:window.print()" class="btn btn-success me-1"><i
