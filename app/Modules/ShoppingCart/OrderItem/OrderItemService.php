@@ -21,4 +21,12 @@ class OrderItemService
     {
         return $this->orderItemRepository->create($data);
     }
+    public function getById(string $id)
+    {
+        return $this->orderItemRepository->getById($id);
+    }
+    public function getByDetailId(string $id)
+    {
+        return $this->orderItemRepository->getByDetailId($id);
+    }
 }

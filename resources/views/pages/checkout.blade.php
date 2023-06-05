@@ -118,8 +118,14 @@
                             @endforeach
 
                             <li class="list-group-item d-flex justify-content-between">
+                                <span>Pajak: </span>
+                                <strong
+                                    id="totalPrice">Rp{{ number_format(floor($shoppingSession->total * 0.11), 2, ',', '.') }}</strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
                                 <span>Total (IDR)</span>
-                                <strong id="totalPrice">Rp{{ number_format($shoppingSession->total, 2, ',', '.') }}</strong>
+                                <strong
+                                    id="totalPrice">Rp{{ number_format($shoppingSession->total + floor($shoppingSession->total * 0.11), 2, ',', '.') }}</strong>
                             </li>
                         </ul>
                     </div>

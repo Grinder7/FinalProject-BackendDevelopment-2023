@@ -82,7 +82,7 @@ class PaymentController extends Controller
                 // Regenerate Shopping Session
                 $this->shoppingSessionService->create(['user_id' => Auth::id()]);
             }
-            return redirect()->route('app.home')->with('success', 'Your order has been placed');
+            return redirect()->route('app.invoice', $orderDetail->id);
         } else {
             return redirect()->route('login.page');
         }

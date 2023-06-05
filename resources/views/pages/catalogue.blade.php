@@ -76,7 +76,7 @@
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script>
         async function fetchData(product_id) {
-            const res = await fetch('http://localhost:8000/catalogue', {
+            const res = await fetch("{{ route('cart.store') }}", {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",

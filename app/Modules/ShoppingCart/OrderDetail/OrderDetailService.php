@@ -21,4 +21,8 @@ class OrderDetailService
     {
         return $this->orderDetailRepository->create($data);
     }
+    public function getById(string $id): OrderDetail | null
+    {
+        return $this->orderDetailRepository->getById($id);
+    }
 }

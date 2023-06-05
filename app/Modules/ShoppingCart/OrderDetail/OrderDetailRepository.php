@@ -21,4 +21,8 @@ class OrderDetailRepository
     {
         return OrderDetail::where('user_id', $id)->first();
     }
+    public function getById(string $id): OrderDetail | null
+    {
+        return OrderDetail::find($id);
+    }
 }

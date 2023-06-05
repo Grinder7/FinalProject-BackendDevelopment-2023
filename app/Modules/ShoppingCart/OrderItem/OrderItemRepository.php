@@ -25,4 +25,8 @@ class OrderItemRepository
     {
         return OrderItem::find($id);
     }
+    public function getByDetailId(string $id): Collection
+    {
+        return OrderItem::where('order_id', $id)->get();
+    }
 }
