@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\InvoiceController;
@@ -45,6 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::post('checkout/deleteitem', [CheckoutController::class, 'deleteItem'])->name('app.checkout.deleteitem');
     Route::post('checkout/confirm', [PaymentController::class, 'confirm'])->name('app.checkout.confirm');
     Route::get('invoice/{id}', [InvoiceController::class, 'index'])->name('app.invoice');
+    Route::get('transaction/{id}', [AppController::class, 'transaction'])->name('app.transaction');
+    Route::get('transaction/{id}/{order_id}', [AppController::class, 'transaction'])->name('app.transaction.order');
+    Route::get('admin/dashboard', [AdminController::class, 'adminHome'])->name('admin.dashboard');
 });
 
 // Route::fallback(function () {

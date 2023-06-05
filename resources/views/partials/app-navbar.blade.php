@@ -14,7 +14,6 @@
             <li><a href="{{ route('catalogue.index') }}" class="nav-link px-2  "
                     style="{{ Request::is('catalogue*') ? 'text-decoration:underline' : '' }}">Catalogue</a>
             </li>
-            {{-- TEMPORARY --}}
             <li><a href="{{ route('app.aboutus') }}" class="nav-link px-2"
                     style="{{ Request::is('aboutus*') ? 'text-decoration:underline' : '' }}">About Us</a></li>
         </ul>
@@ -33,6 +32,14 @@
                                 <i class="fa-solid fa-circle-user fa-xl" style="color: rgb(255,255,255)"></i>
                             </button>
                             <ul class="dropdown-menu">
+                                @can('isAdmin')
+                                    <li>
+                                        <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Dashboard</a>
+                                    </li>
+                                @endcan
+                                <li>
+                                    <a href="{{ route('app.transaction', 'id') }}" class="dropdown-item">Transaction</a>
+                                </li>
                                 <li>
                                     <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
                                 </li>
