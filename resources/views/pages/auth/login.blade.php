@@ -92,11 +92,13 @@
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control @error('password') is-invalid @enderror" id="floatingPassword"
-                    placeholder="Password" name="password" id="floatingPasswordIn">
-                <label for="floatingPassword">Password</label>
+                <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password"
+                    name="password" id="floatingPasswordIn">
+                <label for="floatingPasswordIn">Password</label>
             </div>
-
+            <div class="d-flex float-end pb-3">
+                Doesn't have an account? <span><a href="{{ route('register.page') }}" class="ps-1">Register</a></span>
+            </div>
             <div class="checkbox my-3">
                 <label>
                     <input type="checkbox" name="remember-me" value="1"> Remember me

@@ -105,7 +105,9 @@
                     id="floatingPasswordConfirmation" placeholder="Password Confirmation" name="password_confirmation">
                 <label for="floatingPasswordConfirmation">Password Confirmation</label>
             </div>
-
+            <div class="d-flex float-end pb-3">
+                Already have an account? <span><a href="{{ route('login.page') }}" class="ps-1"> Login</a></span>
+            </div>
             <div class="checkbox mb-3">
                 <label>
                     <input type="checkbox" name="remember-me" value="1"> Remember me
