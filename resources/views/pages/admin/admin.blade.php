@@ -121,12 +121,23 @@
   </div>
 
 </main>
-
-<footer class="py-5 bg-secondary" style="--bs-bg-opacity: .2;">
-  <div class="container">
-    <p class="float-end mb-1">
-      <a href="">Back to top</a>
-    </p>
-    <p class="mb-1">You have reached the end of the page</p>
-  </div>
-</footer>
+<script>
+  Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+})
+</script>
+@include('partials.app-footer')
