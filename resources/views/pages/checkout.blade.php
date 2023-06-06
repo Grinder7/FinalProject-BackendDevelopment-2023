@@ -197,12 +197,12 @@
 
                             <hr class="my-4">
 
-                            <div class="form-check">
+                            {{-- <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="save-info" name="remember_detail"
                                     value="1" @if ($payments[0]->remember_detail) checked @endif>
                                 <label class="form-check-label" for="save-info">Simpan informasi ini untuk
                                     kedepannya</label>
-                            </div>
+                            </div> --}}
 
                             <hr class="my-4">
 
