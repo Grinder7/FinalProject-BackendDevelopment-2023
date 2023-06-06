@@ -61,7 +61,6 @@
         .btn-bd-primary {
             --bd-violet-bg: #712cf9;
             --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
             --bs-btn-font-weight: 600;
             --bs-btn-color: var(--bs-white);
             --bs-btn-bg: var(--bd-violet-bg);
@@ -79,235 +78,191 @@
             z-index: 1500;
         }
     </style>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
 @endsection
+
 @section('content')
     <div class="containers" style="padding-top:6rem">
         <div class="container">
             <main>
                 <div class="py-5 text-center">
-                    <h2>Checkout form</h2>
-                    <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required
-                        form
-                        group has a validation state that can be triggered by attempting to submit the form without
-                        completing
-                        it.</p>
+                    <h2>Checkout</h2>
+                    <p class="lead">Lengkapi Formulir di Bawah Sesuai Identitas Anda</p>
                 </div>
 
                 <div class="row g-5">
                     <div class="col-md-5 col-lg-4 order-md-last">
                         <h4 class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="text-primary">Your cart</span>
-                            {{-- PAKE PHP COUNT() --}}
-                            <span class="badge bg-primary rounded-pill">3</span>
+                            <span class="text-primary">Keranjang Anda</span>
+                            <span class="badge bg-primary rounded-pill">{{ $totalItems }}</span>
                         </h4>
                         <ul class="list-group mb-3">
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
-                                <div>
-                                    <h6 class="my-0">Product name</h6>
-                                    <small class="text-body-secondary">Brief description</small>
-                                </div>
-                                <span class="text-body-secondary">$12</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
-                                <div>
-                                    <h6 class="my-0">Second product</h6>
-                                    <small class="text-body-secondary">Brief description</small>
-                                </div>
-                                <span class="text-body-secondary">$8</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
-                                <div>
-                                    <h6 class="my-0">Third item</h6>
-                                    <small class="text-body-secondary">Brief description</small>
-                                </div>
-                                <span class="text-body-secondary">$5</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-                                <div class="text-success">
-                                    <h6 class="my-0">Promo code</h6>
-                                    <small>EXAMPLECODE</small>
-                                </div>
-                                <span class="text-success">−$5</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between">
-                                <span>Total (USD)</span>
-                                <strong>$20</strong>
-                            </li>
-                        </ul>
-
-                        <form class="card p-2">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Promo code">
-                                <button type="submit" class="btn btn-secondary">Redeem</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-7 col-lg-8">
-                        <h4 class="mb-3">Billing address</h4>
-                        <form class="needs-validation" novalidate>
-                            <div class="row g-3">
-                                <div class="col-sm-6">
-                                    <label for="firstName" class="form-label">First name</label>
-                                    <input type="text" class="form-control" id="firstName" placeholder="" value=""
-                                        required>
-                                    <div class="invalid-feedback">
-                                        Valid first name is required.
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Last name</label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="" value=""
-                                        required>
-                                    <div class="invalid-feedback">
-                                        Valid last name is required.
-                                    </div>
-                                </div>
-
-                                {{-- <div class="col-12">
-                                    <label for="username" class="form-label">Username</label>
-                                    <div class="input-group has-validation">
-                                        <span class="input-group-text">@</span>
-                                        <input type="text" class="form-control" id="username" placeholder="Username"
-                                            required>
-                                        <div class="invalid-feedback">
-                                            Your username is required.
+                            @foreach ($items as $item)
+                                <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <div>
+                                        <h6 class="my-0 pb-2">{{ $item['product_name'] }}</h6>
+                                        <div class="d-inline-flex col-lg-9 align-items-center">
+                                            <label for="product_{{ $item['product_id'] }}" class="form-label pe-2">
+                                                Qty:
+                                            </label>
+                                            <input type="number" min="0" step="1"
+                                                class="form-control form-control-sm quantity-form"
+                                                value="{{ $item['quantity'] }}" id="product_{{ $item['product_id'] }}">
+                                            <i class="fa-solid fa-trash-can ms-3 delete-item" style="cursor: pointer;"></i>
                                         </div>
                                     </div>
-                                </div> --}}
+                                    <span class="text-body-secondary"
+                                        id="sub_total_{{ $item['product_id'] }}">Rp{{ number_format($item['total'], 2, ',', '.') }}</span>
+                                </li>
+                            @endforeach
+
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>SubTotal: </span>
+                                <strong
+                                    id="totalbt">Rp{{ number_format(floor($shoppingSession->total), 2, ',', '.') }}</strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Pajak (11%): </span>
+                                <strong
+                                    id="tax">Rp{{ number_format(floor($shoppingSession->total * 0.11), 2, ',', '.') }}</strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Total (IDR)</span>
+                                <strong
+                                    id="totalPrice">Rp{{ number_format($shoppingSession->total + floor($shoppingSession->total * 0.11), 2, ',', '.') }}</strong>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-7 col-lg-8">
+                        <h4 class="mb-3">Alamat Pembayaran</h4>
+                        <form class="needs-validation" method="POST" action="{{ route('app.checkout.confirm') }}"
+                            novalidate>
+                            @csrf
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <label for="firstName" class="form-label">Nama Depan</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstname"
+                                        placeholder="" value="{{ $payments[0]->firstname }}" required>
+                                    <div class="invalid-feedback">
+                                        Nama depan harus valid.
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="lastName" class="form-label">Nama Belakang</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder=""
+                                        value="{{ $payments[0]->lastname }}" name="lastname" required>
+                                    <div class="invalid-feedback">
+                                        Nama belakang harus valid.
+                                    </div>
+                                </div>
 
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email <span
-                                            class="text-body-secondary">(Optional)</span></label>
-                                    <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                                            class="text-body-secondary">(Opsional)</span></label>
+                                    <input type="email" class="form-control" id="email" placeholder="you@example.com"
+                                        value="{{ $payments[0]->email }}" name="email">
                                     <div class="invalid-feedback">
-                                        Please enter a valid email address for shipping updates.
+                                        Mohon masukkan email yang valid untuk pembaruan pengiriman.
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="address" class="form-label">Address</label>
+                                    <label for="address" class="form-label">Alamat</label>
                                     <input type="text" class="form-control" id="address" placeholder="1234 Main St"
-                                        required>
+                                        value="{{ $payments[0]->address }}" name="address" required>
                                     <div class="invalid-feedback">
-                                        Please enter your shipping address.
+                                        Mohon masukkan alamat pengiriman anda.
                                     </div>
                                 </div>
 
-                                <div class="col-12">
-                                    <label for="address2" class="form-label">Address 2 <span
-                                            class="text-body-secondary">(Optional)</span></label>
+                                <div class="col-md-9">
+                                    <label for="address2" class="form-label">Alamat 2 <span
+                                            class="text-body-secondary">(Opsional)</span></label>
                                     <input type="text" class="form-control" id="address2"
-                                        placeholder="Apartment or suite">
-                                </div>
-
-                                <div class="col-md-5">
-                                    <label for="country" class="form-label">Country</label>
-                                    <select class="form-select" id="country" required>
-                                        <option value="">Choose...</option>
-                                        <option>United States</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Please select a valid country.
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="state" class="form-label">State</label>
-                                    <select class="form-select" id="state" required>
-                                        <option value="">Choose...</option>
-                                        <option>California</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Please provide a valid state.
-                                    </div>
+                                        placeholder="Apartment or suite" value="{{ $payments[0]->address2 }}"
+                                        name="address2">
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label for="zip" class="form-label">Zip</label>
-                                    <input type="text" class="form-control" id="zip" placeholder="" required>
+                                    <label for="zip" class="form-label">Kode Pos</label>
+                                    <input type="text" class="form-control" id="zip" placeholder="" name="zip"
+                                        value="{{ $payments[0]->zip }}"required>
                                     <div class="invalid-feedback">
-                                        Zip code required.
+                                        Kode pos diperlukan.
                                     </div>
                                 </div>
                             </div>
 
                             <hr class="my-4">
 
-                            {{-- <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="same-address">
-                                <label class="form-check-label" for="same-address">Shipping address is the same as my
-                                    billing
-                                    address</label>
-                            </div> --}}
-
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="save-info">
-                                <label class="form-check-label" for="save-info">Save this information for next
-                                    time</label>
+                                <input type="checkbox" class="form-check-input" id="save-info" name="remember_detail"
+                                    value="1" @if ($payments[0]->remember_detail) checked @endif>
+                                <label class="form-check-label" for="save-info">Simpan informasi ini untuk
+                                    kedepannya</label>
                             </div>
 
                             <hr class="my-4">
 
-                            <h4 class="mb-3">Payment</h4>
+                            <h4 class="mb-3">Pembayaran</h4>
 
                             <div class="my-3">
                                 <div class="form-check">
-                                    <input id="credit" name="paymentMethod" type="radio" class="form-check-input"
-                                        checked required>
-                                    <label class="form-check-label" for="credit">Credit card</label>
+                                    <input id="credit" name="payment_method" type="radio" class="form-check-input"
+                                        value="kredit" checked required>
+                                    <label class="form-check-label" for="credit">Kartu Kredit</label>
                                 </div>
                                 <div class="form-check">
-                                    <input id="debit" name="paymentMethod" type="radio" class="form-check-input"
-                                        required>
-                                    <label class="form-check-label" for="debit">Debit card</label>
-                                </div>
-                                <div class="form-check">
-                                    <input id="paypal" name="paymentMethod" type="radio" class="form-check-input"
-                                        required>
-                                    <label class="form-check-label" for="paypal">PayPal</label>
+                                    <input id="debit" name="payment_method" type="radio" class="form-check-input"
+                                        value="debit" required>
+                                    <label class="form-check-label" for="debit">Kartu Debit</label>
                                 </div>
                             </div>
 
                             <div class="row gy-3">
                                 <div class="col-md-6">
-                                    <label for="cc-name" class="form-label">Name on card</label>
-                                    <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                                    <small class="text-body-secondary">Full name as displayed on card</small>
+                                    <label for="cc-name" class="form-label">Nama pada kartu</label>
+                                    <input type="text" class="form-control" id="cc-name" placeholder=""
+                                        name="card_name"required>
+                                    <small class="text-body-secondary">Nama Lengkap sesuai kartu</small>
                                     <div class="invalid-feedback">
-                                        Name on card is required
+                                        Nama pada kartu diperlukan
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="cc-number" class="form-label">Credit card number</label>
-                                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                    <label for="cc-number" class="form-label">Nomor Kartu</label>
+                                    <input type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}"
+                                        class="form-control" id="cc-number" placeholder="xxxx xxxx xxxx xxxx"
+                                        name="card_number" required>
                                     <div class="invalid-feedback">
-                                        Credit card number is required
+                                        Nomor kartu invalid
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label for="cc-expiration" class="form-label">Expiration</label>
-                                    <input type="text" class="form-control" id="cc-expiration" placeholder=""
-                                        required>
+                                    <label for="cc-expiration" class="form-label">Masa Berlaku</label>
+                                    <input type="text" class="form-control" id="cc-expiration" placeholder="mm/yy"
+                                        name="card_expiration" required>
                                     <div class="invalid-feedback">
-                                        Expiration date required
+                                        Tanggal kadaluarsa diperlukan
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <label for="cc-cvv" class="form-label">CVV</label>
-                                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                    <input type="text" class="form-control" id="cc-cvv" placeholder="xxx"
+                                        name="card_cvv" required>
                                     <div class="invalid-feedback">
-                                        Security code required
+                                        CVV diperlukan
                                     </div>
                                 </div>
                             </div>
 
                             <hr class="my-4">
-
-                            <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                            <button class="w-100 btn btn-primary btn-lg" type="submit">Lanjutkan Pembayaran</button>
                         </form>
                     </div>
                 </div>
@@ -315,7 +270,8 @@
         </div>
     @endsection
     @section('scripts')
-        <script>
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+        <script type="text/javascript">
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (() => {
                 'use strict'
@@ -335,6 +291,147 @@
                     }, false)
                 })
             })()
-        </script>
+            // Variable to store the total item
+            let totalItems = {{ $totalItems }};
 
+            // DOM
+            const taxDOM = document.querySelector('#tax');
+            const totalPriceDOM = document.querySelector('#totalPrice');
+            // total before tax
+            const totalbtDOM = document.querySelector('#totalbt');
+
+            // Check if the quantity is changed
+            const quantityForms = document.querySelectorAll('.quantity-form');
+            quantityForms.forEach((quantityForm) => {
+                quantityForm.addEventListener('change', async function() {
+                    const res = await fetch("{{ route('app.checkout.qtyupdate') }}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        },
+                        body: JSON.stringify({
+                            product_id: quantityForm.id.split('_')[1],
+                            quantity: quantityForm.value
+                        })
+                    });
+                    const data = await res.json();
+                    if (data.success == true) {
+                        // Change DOM
+                        alertify.success(data.message);
+                        const tax = data.total * 0.11;
+                        const subTotal = document.querySelector(`#sub_total_${data.product_id}`);
+                        subTotal.innerHTML =
+                            `Rp${new Intl.NumberFormat('id-ID').format(data.subtotal)},00`;
+                        totalbtDOM.innerHTML =
+                            `Rp${new Intl.NumberFormat('id-ID').format(data.total)},00`;
+                        totalPriceDOM.innerHTML =
+                            `Rp${new Intl.NumberFormat('id-ID').format(data.total+tax)},00`;
+                        taxDOM.innerHTML =
+                            `Rp${new Intl.NumberFormat('id-ID').format(tax)},00`;
+                    } else {
+                        // Change DOM
+                        quantityForm.value = data.quantity;
+                        alertify.error(data.message);
+                    }
+                })
+            });
+            // Check if the user want to delete the item
+            const deleteItems = document.querySelectorAll('.delete-item');
+            deleteItems.forEach((deleteItem) => {
+                deleteItem.addEventListener('click', async function() {
+                    const res = await fetch("{{ route('app.checkout.deleteitem') }}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        },
+                        body: JSON.stringify({
+                            product_id: deleteItem.parentElement.querySelector(
+                                '.quantity-form').id.split('_')[1]
+                        })
+                    });
+                    const data = await res.json();
+                    if (data.success == true) {
+                        alertify.success(data.message);
+                        // Change the DOM
+                        deleteItem.parentElement.parentElement.parentElement.remove();
+                        // Change the total price
+                        const tax = data.total * 0.11;
+                        totalbtDOM.innerHTML =
+                            `Rp${new Intl.NumberFormat('id-ID').format(data.total)},00`;
+                        totalPriceDOM.innerHTML =
+                            `Rp${new Intl.NumberFormat('id-ID').format(data.total+tax)},00`;
+                        // Change the badge
+                        totalItems--;
+                        document.querySelector('.badge').innerHTML = totalItems;
+                        // Change the tax
+                        taxDOM.innerHTML =
+                            `Rp${new Intl.NumberFormat('id-ID').format(tax)},00`;
+                    } else {
+                        alertify.error(data.message);
+                    }
+                })
+            });
+
+            function patternMatch({
+                input,
+                template
+            }) {
+                try {
+                    let j = 0;
+                    let plaintext = "";
+                    let countj = 0;
+                    while (j < template.length) {
+                        if (countj > input.length - 1) {
+                            template = template.substring(0, j);
+                            break;
+                        }
+
+                        if (template[j] == input[j]) {
+                            j++;
+                            countj++;
+                            continue;
+                        }
+
+                        if (template[j] == "x") {
+                            template =
+                                template.substring(0, j) + input[countj] + template.substring(j + 1);
+                            plaintext = plaintext + input[countj];
+                            countj++;
+                        }
+                        j++;
+                    }
+
+                    return template;
+                } catch {
+                    return "";
+                }
+            }
+            const cardNumber = document.querySelector('#cc-number');
+            cardNumber.oninput = (e) => {
+                e.target.value = patternMatch({
+                    input: e.target.value,
+                    template: "xxxx xxxx xxxx xxxx",
+                });
+            };
+            const cardExpiration = document.querySelector('#cc-expiration');
+            cardExpiration.oninput = (e) => {
+                e.target.value = patternMatch({
+                    input: e.target.value,
+                    template: "xx/xx",
+                });
+            };
+            const cardCvv = document.querySelector('#cc-cvv');
+            cardCvv.oninput = (e) => {
+                e.target.value = patternMatch({
+                    input: e.target.value,
+                    template: "xxx",
+                });
+            };
+        </script>
     @endsection

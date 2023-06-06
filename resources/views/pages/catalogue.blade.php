@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('title', 'Catalogue - IndoJuni')
+@section('styles')
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+@endsection
 @section('content')
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
@@ -16,12 +20,12 @@
 
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                @foreach ($catalogues as $catalogue)
-                    <div class="col">
+            <div class="row ">
+                @foreach ($products as $product)
+                    <div class="col-lg-4 d-flex align-items-stretch mb-3">
                         <div class="card shadow-sm">
-                            @if ($catalogue->img)
-                                <img src="{{ asset($catalogue->img) }}" alt="cover" height="225"
+                            @if ($product->img)
+                                <img src="{{ asset($product->img) }}" alt="cover" height="225"
                                     style="object-fit: contain">
                             @else
                                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
@@ -32,13 +36,26 @@
                                         fill="#eceeef" dy=".3em">Image</text>
                                 </svg>
                             @endif
-                            <div class="card-body">
-                                <p class="card-text">{{ $catalogue->name }}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-body-secondary">Rp
-                                        {{ number_format($catalogue->price, 2, ',', '.') }}</small>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"><i
-                                            class="fa-solid fa-plus"></i></button>
+                            <div class="card-body d-flex flex-column">
+                                <p class="card-text fw-bolder">{{ $product->name }}</p>
+                                <p class="card-text text-body-secondary mb-4">{{ $product->description }}</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <small
+                                        class="text-body-secondary">Rp{{ number_format($product->price, 2, ',', '.') }}</small>
+                                    <div>
+                                        <small class="text-body-secondary me-2 stock_product">Stok:
+                                            {{ $product->stock }}</small>
+                                        <input type="hidden" name="quantity" value=1>
+                                        <button type="submit" title="Add to cart"
+                                            class="btn btn-sm btn-outline-secondary productAdd" value="{{ $product->id }}"
+                                            name="product_id" @if ($product->stock == 0) disabled @endif>
+                                            @if ($product->stock == 0)
+                                                <i class="fa-solid fa-times"></i>
+                                            @else
+                                                <i class="fa-solid fa-plus"></i>
+                                            @endif
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -47,13 +64,57 @@
             </div>
             <div class="row p-3">
                 <div class="col">
-                    {{ $catalogues->links() }}
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>
     </div>
-
+    <iframe name="frame" style="display:none"></iframe>
     </main>
 @endsection
 @section('scripts')
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script>
+        async function fetchData(product_id) {
+            const res = await fetch("{{ route('cart.store') }}", {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify({
+                        'product_id': product_id,
+                        'quantity': 1
+                    })
+                })
+                .then((response) => response.json());
+            return res;
+        };
+        const productAdds = document.querySelectorAll('.productAdd');
+        productAdds.forEach(productAdd => {
+            productAdd.addEventListener('click', async function() {
+                productAdd.innerHTML = '<i class="fa-solid fa-arrow-rotate-right fa-spin"></i>';
+                productAdd.disabled = true;
+                const stock = this.parentElement.querySelector('.stock_product').innerText.split(' ')[
+                    1];
+                if (stock < 1) {
+                    alertify.error('Stok produk habis');
+                    productAdd.innerHTML = '<i class="fa-solid fa-times"></i>';
+                    productAdd.disabled = true;
+                    return;
+                }
+                const response = await fetchData(this.value);
+                productAdd.innerHTML = '<i class="fa-solid fa-plus"></i>';
+                productAdd.disabled = false;
+                if (response.success == true) {
+                    alertify.success(response.message);
+                } else {
+                    alertify.error(response.message);
+                }
+            });
+        });
+    </script>
 @endsection

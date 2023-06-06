@@ -12,7 +12,7 @@
     <script>
         Swal.fire({
             title: 'Success!',
-            text: '{{ session('success') }}',
+            text: "{{ session('success') }}",
             icon: 'success',
             confirmButtonText: 'Ok'
         })

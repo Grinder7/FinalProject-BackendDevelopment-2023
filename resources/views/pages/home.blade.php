@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
     <title>IndoJuni</title>
 
     <link rel="icon" type="image/x-icon" href="{{ asset('images/app/xyXVxK19116nI6TPT5KF.png') }}" />
@@ -43,7 +42,8 @@
             </main>
             <div class="container mt-auto">
                 <div class="container">
-                    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top ">
+                    <footer
+                        class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-white">
                         <div class="col-md-4 d-flex align-items-center">
                             <a href="https://getbootstrap.com/" target="_blank"
                                 class="mb-3 me-2 mb-md-0 text-decoration-none lh-1">
@@ -59,6 +59,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
+    @include('partials.sweet-alert')
 </body>
 
 </html>
