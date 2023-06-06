@@ -48,7 +48,8 @@ Route::middleware('auth')->group(function () {
     Route::get('invoice/{id}', [InvoiceController::class, 'index'])->name('app.invoice');
     Route::get('transaction/{id}', [AppController::class, 'transaction'])->name('app.transaction');
     Route::get('transaction/{id}/{order_id}', [AppController::class, 'transaction'])->name('app.transaction.order');
-    Route::get('admin/dashboard', [AdminController::class, 'adminHome'])->name('admin.dashboard');
+    Route::get('/admin', [AdminController::class, 'adminHome'])->name('admin.dashboard');
+    Route::get('/admin/invoice', [AdminController::class, 'adminInvoice'])->name('admin.invoice');
 });
 
 // Route::fallback(function () {
