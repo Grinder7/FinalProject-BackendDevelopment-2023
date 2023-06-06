@@ -10,6 +10,17 @@
     animation-duration: 250ms;
 }
 
+#invoiceBox{
+    height: 90%;
+    width: 95%;
+    position:fixed;
+    margin-top: 5vh;
+    margin-left: 2.5vw;
+    z-index: 99999999;
+    visibility: hidden;
+    animation-duration: 250ms;
+}
+
 #imgBox{
     height: 50vh;
     width: 50vh;

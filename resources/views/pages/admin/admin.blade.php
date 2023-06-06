@@ -10,33 +10,33 @@
 
   <div class = "d-flex">
     <div class="d-flex card bg-secondary border-secondary p-1" id="imgBox">
-      <img src="{{asset('images/app/product/0lxKQl2mvqEh70XLvgIA.png')}}" class="centerItem " alt="cover" style="object-fit: cover">
+      <img src="" class="centerItem" id = "display-inp" alt="cover" style="object-fit: cover">
     </div>
 
     <div class = "ms-5 w-50">
       <div class = "input-group mb-3">
         <span class = "input-group-text w-25">Name</span>
-        <input type="text" class = "form-control" value = "Input">
+        <input type="text" class = "form-control" id="name-inp" value = "">
       </div>
 
       <div class = "input-group mb-3">
         <span class = "input-group-text">Description</span>
-        <textarea type="text" class = "form-control" rows = "5"></textarea>
+        <textarea type="text" class = "form-control" id = "desc-inp" rows = "5"></textarea>
       </div>
 
       <div class = "input-group mb-3">
         <span class = "input-group-text">Stock</span>
-        <input type="number" class = "form-control">
+        <input type="number" class = "form-control" id = "stock-inp" value = "">
       </div>
 
       <div class = "input-group mb-3">
         <span class = "input-group-text">Price</span>
-        <input type="number" class = "form-control">
+        <input type="number" class = "form-control" id = "price-inp" value = "">
       </div>
 
       <div class = "input-group mb-3">
         <span class = "input-group-text">Image</span>
-        <input type="file" class = "form-control">
+        <input type="file" class = "form-control" id = "img-inp" value = "">
       </div>
     </div>
   </div>
@@ -92,15 +92,14 @@
 
         <div class="col-lg-4 d-flex align-items-stretch mb-3">
           <div class="card shadow-sm">
-          <img src="{{ asset($product->img) }}" alt="cover" height="225"
-                                    style="object-fit: contain">
-
+          <img src="{{ asset($product->img) }}" alt="cover" height="225" style="object-fit: contain">
+          
             <div class="card-body d-flex flex-column">
-              <p class="card-text"><b>{{$product->name}} (Rp{{$product->price}},00)</b>,<br>{{$product->description}}</p>
+              <p class="card-text"><b>{{$product->name}} (Rp{{ number_format($product->price, 2, ',', '.') }})</b>,<br>{{$product->description}}</p>
               <div class="d-flex justify-content-between align-items-center mt-auto">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary showSidebar" value="{{$product->id}}">Edit</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary delButton">Delete</button>
                 </div>
                 <small class="text-muted">{{$product->stock}} item(s)</small>
               </div>
@@ -122,22 +121,91 @@
 
 </main>
 <script>
-  Swal.fire({
-  title: 'Are you sure?',
-  text: "You won't be able to revert this!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Yes, delete it!'
-}).then((result) => {
-  if (result.isConfirmed) {
-    Swal.fire(
-      'Deleted!',
-      'Your file has been deleted.',
-      'success'
-    )
-  }
-})
+let buttonOpen = document.getElementsByClassName("showSidebar");
+let buttonClose = document.getElementsByClassName("hideSidebar");
+
+let delButton = document.getElementsByClassName("delButton");
+
+let text = document.getElementById("randomText");
+
+for(let i=0; i < buttonOpen.length; i++){
+    buttonOpen[i].addEventListener("click", ()=>{
+        mainBox.style.visibility = "visible";
+        if(buttonOpen[i].value != 0){
+            text.innerHTML = "Edit Data";
+            let initialValue ={
+              name: "",
+              desc: buttonOpen[i].value,
+              stock: "20",
+              price: "4100",
+              image: "",
+            };
+            input.changeInputValue(initialValue);
+        }
+        else{
+            text.innerHTML = "Create New Data";
+            input.clearInputValue();
+        }
+    });
+}
+
+for(let i = 0; i < buttonClose.length; i++){
+    buttonClose[i].addEventListener("click", ()=>{
+        mainBox.style.visibility = "hidden";
+    });
+}
+
+for(let i = 0; i < delButton.length; i++){
+  delButton[i].addEventListener("click", ()=>{
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      }
+    })
+  })
+}
+
+
+const input = {
+    name : document.getElementById("name-inp"),
+    desc : document.getElementById("desc-inp"),
+    stock : document.getElementById("stock-inp"),
+    price : document.getElementById("price-inp"),
+    image : document.getElementById("image-inp"),
+    display : document.getElementById("display-inp"),
+
+    changeInputValue : function(initialValue){
+        this.name.value = initialValue.name;
+        this.desc.value = initialValue.desc;
+        this.stock.value = initialValue.stock;
+        this.price.value = initialValue.price;
+        this.image.value = initialValue.image;
+        this.display.src = initialValue.image;
+    },
+
+    clearInputValue : function(){
+        this.name.value = "";
+        this.desc.value = "";
+        this.stock.value = "";
+        this.price.value = "";
+        this.image.value = "";
+        this.display.src = "";
+    },
+};
+
+
 </script>
 @include('partials.app-footer')

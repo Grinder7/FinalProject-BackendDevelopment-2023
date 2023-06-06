@@ -4,6 +4,14 @@
 
   <body>
     
+<div class="card bg-light border-secondary align-self-middle p-3" id="invoiceBox">
+  <div class = "d-flex justify-content-between mb-5">
+    <h1>View Invoice</h1>
+    <a class = "btn btn-outline-danger align-right squareButton hideSidebar">X</a>
+  </div>
+
+</div>
+
     <header>
       <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
@@ -34,33 +42,27 @@
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th scope="col" style="width: 10%">No</th>
-              <th scope="col" style="width: 30%">Username</th>
+              <th scope="col" style="width: 20%">Order ID</th>
+              <th scope="col" style="width: 25%">Username</th>
               <th scope="col" style="width: 25%">Total Price</th>
-              <th scope="col" style="width: 10%">Status</th>
-              <th scope="col" style="width: 5%">Action</th>
+              <th scope="col" style="width: 10%">Action</th>
             </tr>
           </thead>
           <tbody class = "align-middle">
 
-          <!-- @foreach($invoices as $invoice)
+          @foreach($order_details as $order_detail)
 
             <tr>
-              <td>{{$counter}}</td>
-              <td>{{$invoice->username}}</td>
-              <td>{{$invoice->total}}</td>
-              @if($invoice->user_id != 0){
-                <td>Paid</td>
-              }
-              @else{
-                <td>Not Paid</td>
-              }
+              <td>{{$order_detail->id}}</td>
+              <td>{{$order_detail->username}}</td>
+              <td>Rp{{ number_format($order_detail->total, 2, ',', '.') }}</td>
               <td>
-                <button class="btn btn-outline-primary my-1" value = "{{$invoice->id}}">View</button>
+                <button class="btn btn-outline-primary my-1 showSidebar" value = "{{$order_detail->id}}">View</button>
               </td>
             </tr>
 
-          @endforeach -->
+          @endforeach 
+       
 
           </tbody>
         </table>
@@ -69,4 +71,21 @@
   </div>
 </div>
 
+<script>
+  let buttonOpen = document.getElementsByClassName("showSidebar");
+  let buttonClose = document.getElementsByClassName("hideSidebar");
+
+  for(let i=0; i < buttonOpen.length; i++){
+    buttonOpen[i].addEventListener("click", ()=>{
+        invoiceBox.style.visibility = "visible";
+        let id = buttonOpen.value;
+    });
+  }
+
+  for(let i = 0; i < buttonClose.length; i++){
+    buttonClose[i].addEventListener("click", ()=>{
+        invoiceBox.style.visibility = "hidden";
+    });
+  }
+</script>
 @include('partials/app-footer-II')
