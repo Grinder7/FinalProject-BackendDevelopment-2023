@@ -20,6 +20,14 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     @yield('styles')
+    <style>
+        .swal2-shown {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            scrollbarPadding: false,
+        }
+    </style>
 </head>
 
 <body class="bg-body-tertiary">
