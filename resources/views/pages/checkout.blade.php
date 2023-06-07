@@ -143,7 +143,7 @@
                                 <div class="col-sm-6">
                                     <label for="firstName" class="form-label">Nama Depan</label>
                                     <input type="text" class="form-control" id="firstName" name="firstname"
-                                        placeholder="" value="{{ $payments[0]->firstname }}" required>
+                                        placeholder="" value="{{ old('firstname') }}" required>
                                     <div class="invalid-feedback">
                                         Nama depan harus valid.
                                     </div>
@@ -152,7 +152,7 @@
                                 <div class="col-sm-6">
                                     <label for="lastName" class="form-label">Nama Belakang</label>
                                     <input type="text" class="form-control" id="lastName" placeholder=""
-                                        value="{{ $payments[0]->lastname }}" name="lastname" required>
+                                        value="{{ old('lastname') }}" name="lastname" required>
                                     <div class="invalid-feedback">
                                         Nama belakang harus valid.
                                     </div>
@@ -162,7 +162,7 @@
                                     <label for="email" class="form-label">Email <span
                                             class="text-body-secondary">(Opsional)</span></label>
                                     <input type="email" class="form-control" id="email" placeholder="you@example.com"
-                                        value="{{ $payments[0]->email }}" name="email">
+                                        value="{{ old('name') }}" name="email">
                                     <div class="invalid-feedback">
                                         Mohon masukkan email yang valid untuk pembaruan pengiriman.
                                     </div>
@@ -171,7 +171,7 @@
                                 <div class="col-12">
                                     <label for="address" class="form-label">Alamat</label>
                                     <input type="text" class="form-control" id="address" placeholder="1234 Main St"
-                                        value="{{ $payments[0]->address }}" name="address" required>
+                                        value="{{ old('address') }}" name="address" required>
                                     <div class="invalid-feedback">
                                         Mohon masukkan alamat pengiriman anda.
                                     </div>
@@ -181,28 +181,18 @@
                                     <label for="address2" class="form-label">Alamat 2 <span
                                             class="text-body-secondary">(Opsional)</span></label>
                                     <input type="text" class="form-control" id="address2"
-                                        placeholder="Apartment or suite" value="{{ $payments[0]->address2 }}"
-                                        name="address2">
+                                        placeholder="Apartment or suite" value="{{ old('address2') }}" name="address2">
                                 </div>
 
                                 <div class="col-md-3">
                                     <label for="zip" class="form-label">Kode Pos</label>
                                     <input type="text" class="form-control" id="zip" placeholder="" name="zip"
-                                        value="{{ $payments[0]->zip }}"required>
+                                        value="{{ old('zip') }}"required>
                                     <div class="invalid-feedback">
                                         Kode pos diperlukan.
                                     </div>
                                 </div>
                             </div>
-
-                            <hr class="my-4">
-
-                            {{-- <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="save-info" name="remember_detail"
-                                    value="1" @if ($payments[0]->remember_detail) checked @endif>
-                                <label class="form-check-label" for="save-info">Simpan informasi ini untuk
-                                    kedepannya</label>
-                            </div> --}}
 
                             <hr class="my-4">
 

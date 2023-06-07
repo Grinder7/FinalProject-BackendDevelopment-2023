@@ -35,7 +35,6 @@ class PaymentDetailRequest extends FormRequest
             'card_expiration' => 'required|string|max:6',
             'card_cvv' => 'required|string|max:4',
             'zip' => 'required|string|max:255',
-            'remember_detail' => 'nullable|boolean'
         ];
     }
 }
