@@ -29,12 +29,12 @@ class PaymentDetailRequest extends FormRequest
             'email' => 'nullable|email|max:255',
             'address' => 'required|string|max:255',
             'address2' => 'nullable|string|max:255',
+            'zip' => 'required|integer|digits:5',
             'payment_method' => 'required|string|max:255',
             'card_name' => 'required|string|max:255',
             'card_number' => 'required|string|max:30',
-            'card_expiration' => 'required|string|max:6',
-            'card_cvv' => 'required|string|max:4',
-            'zip' => 'required|string|max:255',
+            'card_expiration' => 'required|date_format:m/y|after_or_equal:now',
+            'card_cvv' => 'required|integer|digits_between:3,4',
         ];
     }
 }

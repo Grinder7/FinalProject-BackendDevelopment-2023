@@ -54,6 +54,7 @@ class CheckoutController extends Controller
     public function qtyUpdate(QuantityUpdateRequest $request)
     {
         $validated = $request->validated();
+        dd($request);
         $shoppingSession = $this->shoppingSessionService->getByUserId(Auth::id());
         $cartItem = $this->cartItemService->getBySessionAndProductId($shoppingSession->id, $validated['product_id']);
         $product = $this->productService->getById($validated['product_id']);
