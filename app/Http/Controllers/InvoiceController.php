@@ -27,16 +27,15 @@ class InvoiceController extends Controller
     public function index(Request $request)
     {
         $data['order_id'] = $request->id;
-        $data['user_id'] = $request->session()->get('user_id');
         $validator = Validator::make($data, [
             'order_id' => 'required|string|exists:order_details,id',
-            'user_id' => 'required|string|exists:users,id'
         ]);
         if ($validator->fails()) {
             $message = $validator->errors()->messages();
             $message = array_values($message)[0][0];
             return redirect()->back()->with('error', $message);
         } else {
+            $data['user_id'] = $this->orderDetailService->getById($data['order_id'])->user_id;
             // Check if user is authorized to view this invoice or the admin wants to view the invoice
             if (Auth::id() == $data['user_id'] || Auth::user()->is_admin === 1) {
                 $orderDetail = $this->orderDetailService->getById($data['order_id']);
@@ -53,8 +52,10 @@ class InvoiceController extends Controller
                 } else {
                     return redirect()->back()->with('error', 'Order not found');
                 }
+                return view('pages.invoice')->with(compact('orderItems', 'paymentDetail', 'orderDetail', 'items'));
+            } else {
+                return redirect()->back()->with('error', 'You are not authorized to view this invoice');
             }
         }
-        return view('pages.invoice')->with(compact('orderItems', 'paymentDetail', 'orderDetail', 'items'));
     }
 }
