@@ -73,7 +73,7 @@ class AdminController extends Controller
             $catalogueData->price = $validate['price'];
             if (isset($validate['img'])) {
                 $path = $request->file('img');
-                $filename = Str::random(20) . '.' . File::extension($path->getClientOriginalName());
+                $filename = str_replace(".", Str::random(1), substr(uniqid("", true), 0, -3)) . '.' . File::extension($path->getClientOriginalName());
                 if (!Storage::disk('admin_img_upload')->put($filename, $path->get())) {
                     return redirect()->back()->with('error', $path->getErrorMessage());
                 } else {
