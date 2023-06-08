@@ -9,6 +9,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ShoppingController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,8 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::post('checkout/deleteitem', [CheckoutController::class, 'deleteItem'])->name('app.checkout.deleteitem');
     Route::post('checkout/confirm', [PaymentController::class, 'confirm'])->name('app.checkout.confirm');
     Route::get('invoice/{id}', [InvoiceController::class, 'index'])->name('app.invoice');
-    Route::get('transaction/{id}', [AppController::class, 'transaction'])->name('app.transaction');
-    Route::get('transaction/{id}/{order_id}', [AppController::class, 'transaction'])->name('app.transaction.order');
+    Route::get('transaction', [TransactionController::class, 'index'])->name('app.transaction');
     Route::get('/admin', [AdminController::class, 'adminHome'])->name('admin.dashboard');
     Route::get('/admin/invoice', [AdminController::class, 'adminInvoice'])->name('admin.invoice');
 });

@@ -36,7 +36,7 @@
                                 </li>
                             @endcan
                             <li>
-                                <a href="{{ route('app.transaction', 'id') }}" class="dropdown-item">Transaction</a>
+                                <a href="{{ route('app.transaction') }}" class="dropdown-item">Transaction</a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
