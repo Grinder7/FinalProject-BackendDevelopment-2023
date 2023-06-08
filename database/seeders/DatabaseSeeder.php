@@ -86,15 +86,6 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
 
         ]);
-        Payment::create([
-            'user_id' => $test_admin->id,
-            'firstname' => 'Admin',
-            'lastname' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'address' => 'Araya Mansion No.8-22, Malang',
-            'zip' => '65154',
-            'remember_detail' => true,
-        ]);
         $test_user = User::create([
             'username' => 'User',
             'email' => 'user@gmail.com',
