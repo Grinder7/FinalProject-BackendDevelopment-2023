@@ -25,13 +25,12 @@ class EditDataRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_id' => 'nullable|string|exists:products,id',
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'stock' => 'required|integer',
             'price' => 'required|integer',
-            'img' => 'nullable|string|max:255',
-            'files'=>'nullable|file|image'
+            'img' => 'nullable|file|image',
+            'product_id' => 'nullable|string|exists:products,id',
         ];
     }
 }

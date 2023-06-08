@@ -88,7 +88,7 @@
 
             <div class="form-floating">
                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="floatingInput"
-                    placeholder="name@example.com" name="email">
+                    placeholder="name@example.com" name="email" value={{ old('email') }}>
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
