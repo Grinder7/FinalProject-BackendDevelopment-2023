@@ -4,13 +4,7 @@
 
   <body>
     
-<div class="card bg-light border-secondary align-self-middle p-3" id="invoiceBox">
-  <div class = "d-flex justify-content-between mb-5">
-    <h1>View Invoice</h1>
-    <a class = "btn btn-outline-danger align-right squareButton hideSidebar">X</a>
-  </div>
 
-</div>
 
     <header>
       <div class="navbar navbar-dark bg-dark shadow-sm">
@@ -37,7 +31,7 @@
       </div>
     </section>
 
-      <h2>Section title</h2>
+      <h2>View Invoices</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
@@ -57,7 +51,7 @@
               <td>{{$order_detail->username}}</td>
               <td>Rp{{ number_format($order_detail->total, 2, ',', '.') }}</td>
               <td>
-                <button class="btn btn-outline-primary my-1 showSidebar" value = "{{$order_detail->id}}">View</button>
+                <a class="btn btn-outline-primary my-1 showSidebar" value = "{{$order_detail->id}}" href ="{{route('app.invoice',$order_detail->id)}}">View</a>
               </td>
             </tr>
 
@@ -79,6 +73,7 @@
     buttonOpen[i].addEventListener("click", ()=>{
         invoiceBox.style.visibility = "visible";
         let id = buttonOpen.value;
+        
     });
   }
 

@@ -7,7 +7,7 @@
     z-index: 99999999;
     --bs-bg-opacity: .95;
     visibility: hidden;
-    animation-duration: 250ms;
+    animation-duration: 250ms; 
 }
 
 #invoiceBox{
