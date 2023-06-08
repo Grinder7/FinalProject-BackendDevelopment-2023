@@ -4,6 +4,8 @@
 
   <body>
     
+
+
     <header>
       <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
@@ -29,38 +31,32 @@
       </div>
     </section>
 
-      <h2>Section title</h2>
+      <h2>View Invoices</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th scope="col" style="width: 10%">No</th>
-              <th scope="col" style="width: 30%">Username</th>
+              <th scope="col" style="width: 20%">Order ID</th>
+              <th scope="col" style="width: 25%">Username</th>
               <th scope="col" style="width: 25%">Total Price</th>
-              <th scope="col" style="width: 10%">Status</th>
-              <th scope="col" style="width: 5%">Action</th>
+              <th scope="col" style="width: 10%">Action</th>
             </tr>
           </thead>
           <tbody class = "align-middle">
 
-          <!-- @foreach($invoices as $invoice)
+          @foreach($order_details as $order_detail)
 
             <tr>
-              <td>{{$counter}}</td>
-              <td>{{$invoice->username}}</td>
-              <td>{{$invoice->total}}</td>
-              @if($invoice->user_id != 0){
-                <td>Paid</td>
-              }
-              @else{
-                <td>Not Paid</td>
-              }
+              <td>{{$order_detail->id}}</td>
+              <td>{{$order_detail->username}}</td>
+              <td>Rp{{ number_format($order_detail->total, 2, ',', '.') }}</td>
               <td>
-                <button class="btn btn-outline-primary my-1" value = "{{$invoice->id}}">View</button>
+                <a class="btn btn-outline-primary my-1 showSidebar" value = "{{$order_detail->id}}" href ="{{route('app.invoice',$order_detail->id)}}">View</a>
               </td>
             </tr>
 
-          @endforeach -->
+          @endforeach 
+       
 
           </tbody>
         </table>
@@ -69,4 +65,22 @@
   </div>
 </div>
 
+<script>
+  let buttonOpen = document.getElementsByClassName("showSidebar");
+  let buttonClose = document.getElementsByClassName("hideSidebar");
+
+  for(let i=0; i < buttonOpen.length; i++){
+    buttonOpen[i].addEventListener("click", ()=>{
+        invoiceBox.style.visibility = "visible";
+        let id = buttonOpen.value;
+        
+    });
+  }
+
+  for(let i = 0; i < buttonClose.length; i++){
+    buttonClose[i].addEventListener("click", ()=>{
+        invoiceBox.style.visibility = "hidden";
+    });
+  }
+</script>
 @include('partials/app-footer-II')

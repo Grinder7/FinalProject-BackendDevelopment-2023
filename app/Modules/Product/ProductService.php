@@ -31,4 +31,8 @@ class ProductService
     {
         return $this->productRepository->getProductPaginated($page, $column);
     }
+    public function createData(array $data): Product
+    {
+        return $this->productRepository->createProduct($data);
+    }
 }
