@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\QuantityUpdateRequest;
-use App\Modules\Payment\PaymentService;
 use App\Modules\Product\ProductService;
 use App\Modules\ShoppingCart\CartItem\CartItemService;
 use App\Modules\ShoppingCart\ShoppingSession\ShoppingSessionService;
@@ -13,15 +12,13 @@ use Illuminate\Support\Facades\Response;
 
 class CheckoutController extends Controller
 {
-    public PaymentService $paymentService;
     public ShoppingSessionService $shoppingSessionService;
     public CartItemService $cartItemService;
     public ProductService $productService;
 
 
-    public function __construct(PaymentService $paymentService, ShoppingSessionService $shoppingSessionService, CartItemService $cartItemService, ProductService $productService)
+    public function __construct(ShoppingSessionService $shoppingSessionService, CartItemService $cartItemService, ProductService $productService)
     {
-        $this->paymentService = $paymentService;
         $this->shoppingSessionService = $shoppingSessionService;
         $this->cartItemService = $cartItemService;
         $this->productService = $productService;
@@ -29,7 +26,6 @@ class CheckoutController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            $payments = $this->paymentService->getByUserId(Auth::id());
             // Get Shoppping Session
             $shoppingSession = $this->shoppingSessionService->getByUserId(Auth::id());
             // Get Cart Item
@@ -49,21 +45,8 @@ class CheckoutController extends Controller
             if (!isset($items)) {
                 $items = collect([]);
             }
-            if (count($payments) === 0) {
-                $payments = collect([0 => (object)[
-                    'firstname' => '',
-                    'lastname' => '',
-                    'email' => '',
-                    'address' => '',
-                    'address2' => '',
-                    'state' => '',
-                    'city' => '',
-                    'zip' => '',
-                    'remember_detail' => false
-                ]]);
-            }
             $totalItems = count($items);
-            return view('pages.checkout')->with(compact('payments'))->with(compact('shoppingSession'))->with(compact('items'))->with(compact('totalItems'));
+            return view('pages.checkout')->with(compact('shoppingSession'))->with(compact('items'))->with(compact('totalItems'));
         } else {
             return redirect()->route('login.page');
         }
@@ -71,6 +54,7 @@ class CheckoutController extends Controller
     public function qtyUpdate(QuantityUpdateRequest $request)
     {
         $validated = $request->validated();
+        dd($request);
         $shoppingSession = $this->shoppingSessionService->getByUserId(Auth::id());
         $cartItem = $this->cartItemService->getBySessionAndProductId($shoppingSession->id, $validated['product_id']);
         $product = $this->productService->getById($validated['product_id']);

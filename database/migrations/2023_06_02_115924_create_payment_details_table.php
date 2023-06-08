@@ -24,9 +24,9 @@ return new class extends Migration
             $table->string('zip');
             $table->string('payment_method');
             $table->string('card_name');
-            $table->string('card_number');
+            $table->integer('card_number');
             $table->string('card_expiration');
-            $table->string('card_cvv');
+            $table->integer('card_cvv');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });

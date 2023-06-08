@@ -28,7 +28,7 @@
     </style>
 </head>
 
-<body class="text-center bg-body-tertiary">
+<body class="text-center bg-body-tertiary h-100 w-100">
     @yield('content')
 
     @yield('scripts')

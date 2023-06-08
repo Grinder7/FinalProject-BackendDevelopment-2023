@@ -21,13 +21,20 @@
         .nav-link {
             color: white;
         }
+
+        .swal2-shown {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            scrollbarPadding: false,
+        }
     </style>
 </head>
 
 <body>
     @include('partials.app-navbar')
 
-    <div class="d-flex h-100 text-center"
+    <div class="d-flex h-100 text-center w-100"
         style="padding-top:6rem; background-image:url({{ asset('images/app/ZiO1i56gJbwduUeaoQDW.jpg') }}); background-repeat:no-repeat; background-size:cover; background-position:center">
         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
             <main class="px-3 align-items-center mt-auto">

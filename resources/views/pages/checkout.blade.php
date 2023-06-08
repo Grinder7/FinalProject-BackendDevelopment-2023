@@ -80,6 +80,10 @@
     </style>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css"
+        integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endsection
 
 @section('content')
@@ -143,7 +147,7 @@
                                 <div class="col-sm-6">
                                     <label for="firstName" class="form-label">Nama Depan</label>
                                     <input type="text" class="form-control" id="firstName" name="firstname"
-                                        placeholder="" value="{{ $payments[0]->firstname }}" required>
+                                        placeholder="" value="{{ old('firstname') }}" required>
                                     <div class="invalid-feedback">
                                         Nama depan harus valid.
                                     </div>
@@ -152,7 +156,7 @@
                                 <div class="col-sm-6">
                                     <label for="lastName" class="form-label">Nama Belakang</label>
                                     <input type="text" class="form-control" id="lastName" placeholder=""
-                                        value="{{ $payments[0]->lastname }}" name="lastname" required>
+                                        value="{{ old('lastname') }}" name="lastname" required>
                                     <div class="invalid-feedback">
                                         Nama belakang harus valid.
                                     </div>
@@ -162,7 +166,7 @@
                                     <label for="email" class="form-label">Email <span
                                             class="text-body-secondary">(Opsional)</span></label>
                                     <input type="email" class="form-control" id="email" placeholder="you@example.com"
-                                        value="{{ $payments[0]->email }}" name="email">
+                                        value="{{ old('name') }}" name="email">
                                     <div class="invalid-feedback">
                                         Mohon masukkan email yang valid untuk pembaruan pengiriman.
                                     </div>
@@ -171,7 +175,7 @@
                                 <div class="col-12">
                                     <label for="address" class="form-label">Alamat</label>
                                     <input type="text" class="form-control" id="address" placeholder="1234 Main St"
-                                        value="{{ $payments[0]->address }}" name="address" required>
+                                        value="{{ old('address') }}" name="address" required>
                                     <div class="invalid-feedback">
                                         Mohon masukkan alamat pengiriman anda.
                                     </div>
@@ -181,27 +185,17 @@
                                     <label for="address2" class="form-label">Alamat 2 <span
                                             class="text-body-secondary">(Opsional)</span></label>
                                     <input type="text" class="form-control" id="address2"
-                                        placeholder="Apartment or suite" value="{{ $payments[0]->address2 }}"
-                                        name="address2">
+                                        placeholder="Apartment or suite" value="{{ old('address2') }}" name="address2">
                                 </div>
 
                                 <div class="col-md-3">
                                     <label for="zip" class="form-label">Kode Pos</label>
-                                    <input type="text" class="form-control" id="zip" placeholder="" name="zip"
-                                        value="{{ $payments[0]->zip }}"required>
+                                    <input type="text" class="form-control" id="zip" placeholder=""
+                                        name="zip" value="{{ old('zip') }}"required>
                                     <div class="invalid-feedback">
                                         Kode pos diperlukan.
                                     </div>
                                 </div>
-                            </div>
-
-                            <hr class="my-4">
-
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="save-info" name="remember_detail"
-                                    value="1" @if ($payments[0]->remember_detail) checked @endif>
-                                <label class="form-check-label" for="save-info">Simpan informasi ini untuk
-                                    kedepannya</label>
                             </div>
 
                             <hr class="my-4">
@@ -225,7 +219,7 @@
                                 <div class="col-md-6">
                                     <label for="cc-name" class="form-label">Nama pada kartu</label>
                                     <input type="text" class="form-control" id="cc-name" placeholder=""
-                                        name="card_name"required>
+                                        name="card_name" value="{{ old('card_name') }}" required>
                                     <small class="text-body-secondary">Nama Lengkap sesuai kartu</small>
                                     <div class="invalid-feedback">
                                         Nama pada kartu diperlukan
@@ -236,7 +230,7 @@
                                     <label for="cc-number" class="form-label">Nomor Kartu</label>
                                     <input type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}"
                                         class="form-control" id="cc-number" placeholder="xxxx xxxx xxxx xxxx"
-                                        name="card_number" required>
+                                        name="card_number" value="{{ old('card_number') }}" required>
                                     <div class="invalid-feedback">
                                         Nomor kartu invalid
                                     </div>
@@ -244,17 +238,26 @@
 
                                 <div class="col-md-3">
                                     <label for="cc-expiration" class="form-label">Masa Berlaku</label>
-                                    <input type="text" class="form-control" id="cc-expiration" placeholder="mm/yy"
-                                        name="card_expiration" required>
+                                    <input type="text" class="form-control datepicker" id="cc-expiration"
+                                        placeholder="mm/yy" name="card_expiration" value="{{ old('card_expiration') }}"
+                                        required>
                                     <div class="invalid-feedback">
                                         Tanggal kadaluarsa diperlukan
                                     </div>
                                 </div>
+                                {{-- <div class="col-md-3">
+                                    <label for="cc-expiration" class="form-label">Masa Berlaku</label>
+                                    <input type="text" class="form-control" id="cc-expiration" placeholder="mm/yy"
+                                        name="card_expiration"value="{{ old('card_expiration') }}" required>
+                                    <div class="invalid-feedback">
+                                        Tanggal kadaluarsa diperlukan
+                                    </div>
+                                </div> --}}
 
                                 <div class="col-md-3">
                                     <label for="cc-cvv" class="form-label">CVV</label>
                                     <input type="text" class="form-control" id="cc-cvv" placeholder="xxx"
-                                        name="card_cvv" required>
+                                        name="card_cvv" value="{{ old('card_cvv') }}"required>
                                     <div class="invalid-feedback">
                                         CVV diperlukan
                                     </div>
@@ -271,7 +274,20 @@
     @endsection
     @section('scripts')
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"
+            integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script type="text/javascript">
+            // Datepicker
+
+            $('.datepicker').datepicker({
+                format: "mm/yy",
+                startView: "months",
+                minViewMode: "months"
+            });
+
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (() => {
                 'use strict'
@@ -431,6 +447,13 @@
                 e.target.value = patternMatch({
                     input: e.target.value,
                     template: "xxx",
+                });
+            };
+            const zip = document.querySelector('#zip');
+            zip.oninput = (e) => {
+                e.target.value = patternMatch({
+                    input: e.target.value,
+                    template: "xxxxx",
                 });
             };
         </script>

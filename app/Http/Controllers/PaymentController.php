@@ -81,10 +81,15 @@ class PaymentController extends Controller
                 $this->cartItemService->deleteBySessionId($shoppingSession->id);
                 // Regenerate Shopping Session
                 $this->shoppingSessionService->create(['user_id' => Auth::id()]);
+                // $request = Request::createFromGlobals();
+                $request = Request::create(route('app.invoice', $orderDetail->id), 'GET', ['id' => $orderDetail->id, 'user_id' => Auth::id()]);
+                // dd($request);
+                // $response = app()->handle($request);
+                return redirect()->route('app.invoice',  $orderDetail)->with('user_id', Auth::id());
             }
-            return redirect()->route('app.invoice', $orderDetail->id);
         } else {
             return redirect()->route('login.page');
         }
+        return redirect()->route('app.checkout')->with('error', 'Something went wrong');
     }
 }
