@@ -26,4 +26,8 @@ class ProductRepository
     {
         return Product::find($id);
     }
+    public function createProduct(array $data): Product
+    {
+        return Product::create($data);
+    }
 }

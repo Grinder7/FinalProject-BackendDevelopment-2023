@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
     Route::get('transaction', [TransactionController::class, 'index'])->name('app.transaction');
     Route::get('/admin', [AdminController::class, 'adminHome'])->name('admin.dashboard');
     Route::get('/admin/invoice', [AdminController::class, 'adminInvoice'])->name('admin.invoice');
+    Route::post('/admin', [AdminController::class, 'editData'])->name('adm.edit');
+    Route::post('/admin/delete', [AdminController::class, 'deleteData'])->name('adm.delete');
 });
 
 // Route::fallback(function () {

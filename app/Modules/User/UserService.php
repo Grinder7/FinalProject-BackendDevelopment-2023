@@ -42,4 +42,8 @@ class UserService
         event(new Registered($createdUser));
         return $createdUser != null;
     }
+    public function getAllData(): Collection
+    {
+        return $this->userRepository->getAllUser();
+    }
 }
