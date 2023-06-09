@@ -43,8 +43,6 @@
                     IndoJuni!
                 </p>
                 <p class="lead" style="text-shadow: unset">
-                    <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Pelajari Lebih
-                        Lanjut</a>
                 </p>
             </main>
             <div class="container mt-auto">
