@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('zip');
             $table->string('payment_method');
             $table->string('card_name');
-            $table->integer('card_number');
+            $table->string('card_number');
             $table->string('card_expiration');
             $table->integer('card_cvv');
             $table->timestamps();
