@@ -15,12 +15,12 @@ class OrderDetail extends Model
         'total',
         'payment_id',
     ];
-    public function user_id()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function payment_id()
+    public function payment()
     {
-        return $this->belongsTo(Payment::class);
+        return $this->belongsTo(PaymentDetail::class);
     }
 }
